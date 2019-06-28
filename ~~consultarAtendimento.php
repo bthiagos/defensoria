@@ -99,7 +99,7 @@ include("conexao.php");
                     <div class="row">
                         <div class="col-sm-9"></div>
                         <div class="col-sm-3">
-                            <a href="novoAtendimento.php" class="btn btn-primary btn-block">Adicionar Atendimento</a>
+                            <a href="novoAtendimento.php" class="btn btn-primary">Adicionar Atendimento</a>
                         </div>
                     </div><br />
                     <div class="row">
@@ -128,14 +128,11 @@ include("conexao.php");
                                         <td><?php echo $dados['cpf_assistido']; ?></td>
                                         <td><?php echo $dados['sexo_assistido']; ?></td>
                                         <td><?php echo $dados['email_assistido']; ?></td>
-                                        <td>
-                                            <a href="verAtendimento.php?id=<?php echo $dados['idatendimento']; ?>"
-                                                class="btn btn-success btn-custom">
-                                                <i class="material-icons">visibility</i>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-custom">
-                                            <i class="material-icons">delete</i></a>
-                                        </td>
+                                        <td><a href="editarAtendimento.php?id=<?php echo $dados['idatendimento']; ?>"
+                                            class="btn btn-success btn-custom">
+                                            <i class="material-icons">edit</i></a>
+                                            <a href="#" class="btn btn-danger btn-custom"><i
+                                                    class="material-icons">delete</i></a></td>
                                     </tr>
                                     <?php endwhile; ?>
 

@@ -93,58 +93,59 @@ include("conexao.php");
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Atendimentos
+                    Visualizar Atendimento
                 </div>
                 <div class="panel-body">
+                    <?php
+                    //SELECT
+                    if(isset($_GET['id'])):
+                        $id = mysqli_escape_string($conexao, $_GET['id']);
+                        $sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
+                        $resultado = mysqli_query($conexao, $sql);
+                        $dados =  mysqli_fetch_array($resultado);
+                    endif;    
+                ?>
                     <div class="row">
-                        <div class="col-sm-9"></div>
-                        <div class="col-sm-3">
-                            <a href="novoAtendimento.php" class="btn btn-primary btn-block">Adicionar Atendimento</a>
-                        </div>
-                    </div><br />
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-striped">
-
-                                <thead>
-                                    <tr>
-                                        <th>Nº Atendimento</th>
-                                        <th>Nome</th>
-                                        <th>CPF</th>
-                                        <th>Sexo</th>
-                                        <th>E-mail</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
                                 <tbody>
-                                    <?php
-                                    $sql = "SELECT * FROM atendimento";
-                                    $resultado = mysqli_query($conexao, $sql);
-                                    while($dados = mysqli_fetch_array($resultado)):
-                                    ?>
                                     <tr>
-                                        <td><?php echo $dados['idatendimento']; ?></td>
-                                        <td><?php echo $dados['nome_assistido']; ?></td>
-                                        <td><?php echo $dados['cpf_assistido']; ?></td>
-                                        <td><?php echo $dados['sexo_assistido']; ?></td>
-                                        <td><?php echo $dados['email_assistido']; ?></td>
-                                        <td>
-                                            <a href="verAtendimento.php?id=<?php echo $dados['idatendimento']; ?>"
-                                                class="btn btn-success btn-custom">
-                                                <i class="material-icons">visibility</i>
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-custom">
-                                            <i class="material-icons">delete</i></a>
-                                        </td>
+                                        <td class="col-sm-2">Nº Atendimento: </td>
+                                        <td class="col-sm-8"><?php echo $dados['idatendimento']; ?></td>
                                     </tr>
-                                    <?php endwhile; ?>
-
+                                    <tr>
+                                        <td>Nome: </td>
+                                        <td><?php echo $dados['nome_assistido']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CPF: </td>
+                                        <td><?php echo $dados['cpf_assistido']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sexo: </td>
+                                        <td><?php echo $dados['sexo_assistido']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-mail: </td>
+                                        <td><?php echo $dados['email_assistido']; ?></td>
+                                    </tr>
                                 </tbody>
                             </table>
+                            <div class="row">
+                                <div class="col-sm-10">
 
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="consultarAtendimento.php"
+                                        class="btn btn-danger btn-block">
+                                        <i class='fa fa-arrow-left'></i>
+                                        Voltar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br /><br />
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ include('verifica_login.php');
 include("conexao.php");
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
