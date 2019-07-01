@@ -136,8 +136,8 @@ include('verifica_login.php');
                                 <div class="form-group">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
                                         <label for="matricula">Matrícula <h11>*</h11></label>
-                                        <input name="matricula" type="number" class="form-control" required="true"
-                                            id="matricula" placeholder="Matrícula (5 dígitos)" min="00001" max="99999">
+                                        <input name="matricula" type="text" class="form-control" required="true"
+                                            id="matricula" placeholder="Matrícula (5 dígitos)" min="00001" max="99999" maxlength="5" pattern="[0-9]+$">
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control"></div>
 
