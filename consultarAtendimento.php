@@ -133,9 +133,33 @@ include("conexao.php");
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-custom">
-                                            <i class="material-icons">delete</i></a>
+                                            <a href="#myModal<?php echo $dados['idatendimento']; ?>"
+                                                class="btn btn-danger btn-custom"
+                                                data-toggle="modal" data-target="#myModal">
+                                                <i class="material-icons">delete</i></a>
                                         </td>
+                                        <!-- Modal -->
+                                        <div id="myModal<?php echo $dados['idatendimento']; ?>" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Modal Header</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Some text in the modal.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">Fechar</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </tr>
                                     <?php endwhile; ?>
 
