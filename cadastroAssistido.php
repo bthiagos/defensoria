@@ -98,7 +98,7 @@ include("conexao.php");
                 </div>
                 <div class="panel-body">
                     <?php
-                        if(isset($_SESSION['status_atendimento'])):
+                        if(isset($_SESSION['status_cadastroAssistido'])):
                         ?>
 
                     <div class="alert alert-sucess" role="alert">
@@ -107,10 +107,10 @@ include("conexao.php");
 
                     <?php
                         endif;
-                        unset($_SESSION['status_atendimento']);
+                        unset($_SESSION['status_cadastroAssistido']);
                         ?>
                     <?php
-                        if(isset($_SESSION['assistido_existe'])):
+                        if(isset($_SESSION['cpf_assistido_existe'])):
                         ?>
 
                     <div class="alert alert-danger" role="alert">
@@ -120,10 +120,10 @@ include("conexao.php");
 
                     <?php
                         endif;
-                        unset($_SESSION['assistido_existe']);
+                        unset($_SESSION['cpf_assistido_existe']);
                         ?>
                     <div class="box">
-                        <form action="cadastrar.php" method="POST">
+                        <form action="cadastrarAssistido.php" method="POST">
                             <div class="row">
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo Obrigatório *</div>
