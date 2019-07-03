@@ -133,10 +133,10 @@ include("conexao.php");
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>
-                                            <a href="#myModal<?php echo $dados['idatendimento']; ?>"
+                                           <!-- <a href="#myModal<?php echo $dados['idatendimento']; ?>"
                                                 class="btn btn-danger btn-custom"
                                                 data-toggle="modal" data-target="#myModal">
-                                                <i class="material-icons">delete</i></a>
+                                                <i class="material-icons">delete</i></a>-->
                                         </td>
                                         <!-- Modal -->
                                         <div id="myModal<?php echo $dados['idatendimento']; ?>" class="modal fade" role="dialog">

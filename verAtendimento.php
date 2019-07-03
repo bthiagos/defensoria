@@ -104,7 +104,15 @@ include("conexao.php");
                         $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
                     endif;    
-                ?>
+                     ?>
+
+                     <?php
+                         $sqlfk = "SELECT * FROM atendimento 
+                        INNER JOIN usuario ON atendimento.idestagiario = 'usuario.nome'";
+                        $resultest = mysqli_query($conexao, $sqlfk);
+                        $dadosfk = mysqli_fetch_array($resultest);
+                    
+                     ?>
                     <div class="row">
                     </div>
                     <div class="row">
@@ -130,6 +138,13 @@ include("conexao.php");
                                     <tr>
                                         <td>E-mail: </td>
                                         <td><?php echo $dados['email_assistido']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Área do Direito </td>
+                                        <td><?php echo $dados['idareadodireito']; ?></td>
+                                    </tr>
+                                        <td>Estagiário do Atendimento </td>
+                                        <td><?php echo $dadosfk['nome']; ?></td>
                                     </tr>
                                 </tbody>
                             </table>

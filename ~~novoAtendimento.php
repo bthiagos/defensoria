@@ -133,7 +133,7 @@ include("conexao.php");
                         <!-- Text input-->
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="nome_assistido">Nome Completo <h11>*</h11>
-                            </label>
+                                </label>
                             <div class="col-md-8">
                                 <input id="nome_assistido" name="nome_assistido" placeholder=""
                                     class="form-control input-md" required="" type="text">
@@ -211,22 +211,15 @@ include("conexao.php");
                             </label>
 
                             <div class="col-md-3">
-                                <?php
-                                    $sql = "SELECT * FROM areadodireito";
-                                    $resultado = mysqli_query($conexao, $sql);
-                                ?>
+                                <!--<input id="dominioDireito1" name="dominioDireito" placeholder=" Informe o domínio do Direito" class="form-control input-md" required="" type="text">-->
+                                <select required id="dominioDireito" name="dominioDireito" class="form-control">
+                                    <option value=""></option>
+                                    <option value="Civel">Cível</option>
+                                    <option value="Familia">Família</option>
+                                    <option value="Consumidor">Consumidor</option>
+                                    <option value="Fazenda Publica">Fazenda Pública</option>
+                                    <option value="Criminal">Criminal</option>
 
-
-                                <select required id="dominioDireito" name="idareadodireito" class="form-control">
-                                    <option value="">Selecione uma área do direito</option>
-                                    <?php 
-                                        while($dados = mysqli_fetch_array($resultado)):
-                                    ?>
-                                    <option value="<?php echo $dados['idareadodireito'] ?>">
-                                        <?php echo $dados['tipodireito'] ?></option>
-                                    <?php
-                                        endwhile;
-                                    ?>
                                 </select>
                             </div>
 
@@ -237,9 +230,12 @@ include("conexao.php");
                             </label>
                             <div class="col-md-3">
                                 <select required id="estagiario" name="estagiario" class="form-control">
-                                    <option value="<?php echo $_SESSION['idestagiario'];?> ">
-                                        <?php echo $_SESSION['nome'];?> </option>
-
+                                    <option value=""></option>
+                                    <option value="Paula Wilson">Paula Wilson</option>
+                                    <option value="Jose Silva">Jose Silva</option>
+                                    <option value="Carla Maria">Carla Maria</option>
+                                    <option value="Antonio Almeida">Antonio Almeida</option>
+                                    <option value="Joana Nascimento">Joana Nascimento</option>
 
                                 </select>
                             </div>

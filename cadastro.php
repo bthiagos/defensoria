@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('verifica_login.php');
+include("conexao.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,30 +138,31 @@ include('verifica_login.php');
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
                                         <label for="matricula">Matrícula <h11>*</h11></label>
                                         <input name="matricula" type="text" class="form-control" required="true"
-                                            id="matricula" placeholder="Matrícula (5 dígitos)" min="00001" max="99999" maxlength="5" pattern="[0-9]+$">
+                                            id="matricula" placeholder="Matrícula (5 dígitos)" min="00001" max="99999"
+                                            maxlength="5" pattern="[0-9]+$">
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control"></div>
 
                                     <!-- Tipo do Estagiário -->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                         <label for=" Tipo de Estagiário">Tipo do Estagiário <h11>*</h11></label>
-                                        <!--<div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="contratado"
-                                                id="inlineRadio1" value="est_contratado">
-                                            <label class="form-check-label" for="inlineRadio1">Estagiário
-                                                Contratado</label>
+                                        <?php
+                                            $sql = "SELECT * FROM tipo_estagiario";
+                                            $resultado = mysqli_query($conexao, $sql);
+                                        ?>
 
-                                            <input class="form-check-input" type="radio" name="voluntário"
-                                                id="inlineRadio2" value="est_voluntário">
-                                            <label class="form-check-label" for="inlineRadio2">Estagiário
-                                                Voluntário</label>
-                                        </div>-->
-
-                                        <select required id="tipo_estagiario" name="tipo_estagiario"
+                                        <select required id="tipo_estagiario" name="idtipoestagiario"
                                             class="form-control">
-                                            <option value=""></option>
-                                            <option id="est_contratado" name="est_contratado" value="est_contratado">Estagiário Contratado</option>
-                                            <option id="est_voluntario" name="est_voluntario" value="est_voluntario">Estagiário Voluntário</option>
+                                            <option value="">Selecione o tipo do Estagiário</option>
+                                            <?php
+                                                while($dados = mysqli_fetch_array($resultado)):
+                                            ?>
+                                            <option value="<?php echo $dados['idtipoestagiario']; ?>">
+                                                <?php echo $dados['cargo']; ?>
+                                            </option>
+                                            <?php
+                                                endwhile;
+                                            ?>
                                         </select>
 
                                     </div>
@@ -185,17 +187,23 @@ include('verifica_login.php');
                                         <select required id="hora_estagiario" name="hora_estagiario"
                                             class="form-control">
                                             <option value=""></option>
-                                            <option name="hora_est_contratado_1" value="seg_a_sex_07_13" class="est_contratado">seg à sex
+                                            <option name="hora_est_contratado_1" value="seg_a_sex_07_13"
+                                                class="est_contratado">seg à sex
                                                 | 07:00 - 13:00</option>
-                                            <option name="hora_est_contratado_2" value="seg_a_sex_13_19" class="est_contratado">seg à sex
+                                            <option name="hora_est_contratado_2" value="seg_a_sex_13_19"
+                                                class="est_contratado">seg à sex
                                                 | 13:00 - 19:00</option>
-                                            <option name="hora_est_voluntario_1_1" value="seg_qua_07_13" class="est_voluntario">seg -
+                                            <option name="hora_est_voluntario_1_1" value="seg_qua_07_13"
+                                                class="est_voluntario">seg -
                                                 qua | 07:00 - 13:00</option>
-                                            <option name="hora_est_voluntario_1_2" value="seg_qua_13_19" class="est_voluntario">seg -
+                                            <option name="hora_est_voluntario_1_2" value="seg_qua_13_19"
+                                                class="est_voluntario">seg -
                                                 qua | 13:00 - 19:00</option>
-                                            <option name="hora_est_voluntario_2_1" value="ter_qui_07_13" class="est_voluntario">ter -
+                                            <option name="hora_est_voluntario_2_1" value="ter_qui_07_13"
+                                                class="est_voluntario">ter -
                                                 qui | 07:00 - 13:00</option>
-                                            <option name="hora_est_voluntario_2_2" value="ter_qui_13_19" class="est_voluntario">ter -
+                                            <option name="hora_est_voluntario_2_2" value="ter_qui_13_19"
+                                                class="est_voluntario">ter -
                                                 qui | 13:00 - 19:00</option>
                                         </select>
 
