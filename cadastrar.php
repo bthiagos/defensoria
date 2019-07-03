@@ -9,6 +9,7 @@ $senha = mysqli_real_escape_string($conexao, trim(md5($_POST['senha'])));
 $tipo_estagiario = mysqli_real_escape_string($conexao, trim($_POST['tipo_estagiario']));
 $hora_estagiario = mysqli_real_escape_string($conexao, trim($_POST['hora_estagiario']));
 $idtipoestagiario = mysqli_real_escape_string($conexao, trim($_POST['idtipoestagiario']));
+$instituicaoensino = mysqli_real_escape_string($conexao, trim($_POST['instituicaoensino']));
 
 $sql = "select count(*) as total from usuario where matricula = '$matricula'";
 $result = mysqli_query($conexao, $sql);
@@ -20,7 +21,7 @@ if($row['total'] == 1) {
 	exit;
 }
 
-$sql = "INSERT INTO usuario (matricula, nome, email, senha, idtipoestagiario, hora_estagiario, data_cadastro) VALUES ('$matricula', '$nome', '$email', '$senha', '$idtipoestagiario', '$hora_estagiario', NOW())";
+$sql = "INSERT INTO usuario (matricula, nome, email, senha, idtipoestagiario, hora_estagiario, instituicaoensino, data_cadastro) VALUES ('$matricula', '$nome', '$email', '$senha', '$idtipoestagiario', '$hora_estagiario', '$instituicaoensino', NOW())";
 
 if($conexao->query($sql) === TRUE) {
 	$_SESSION['status_cadastro'] = true;

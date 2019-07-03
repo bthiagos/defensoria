@@ -113,13 +113,13 @@ include("conexao.php");
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Atendimentos
+                    Relatórios de Atividade Complementar
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-9"></div>
+                        <div class="col-sm-9"> <h4>Lista de Estagiários</h4></div>
                         <div class="col-sm-3">
-                            <a href="novoAtendimento.php" class="btn btn-primary btn-block">Adicionar Atendimento</a>
+                           <!-- <a href="novoAtendimento.php" class="btn btn-primary btn-block">Adicionar Atendimento</a>-->
                         </div>
                     </div><br />
                     <div class="row">
@@ -128,28 +128,27 @@ include("conexao.php");
 
                                 <thead>
                                     <tr>
-                                        <th>Nº Atendimento</th>
+                                        <th>Matrícula</th>
                                         <th>Nome</th>
-                                        <th>CPF</th>
-                                        <th>Sexo</th>
                                         <th>E-mail</th>
+                                        <th>Instituição de Ensino</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM atendimento";
+                                    $sql = "SELECT * FROM usuario";
                                     $resultado = mysqli_query($conexao, $sql);
                                     while($dados = mysqli_fetch_array($resultado)):
                                     ?>
                                     <tr>
-                                        <td><?php echo $dados['idatendimento']; ?></td>
-                                        <td><?php echo $dados['nome_assistido']; ?></td>
-                                        <td><?php echo $dados['cpf_assistido']; ?></td>
-                                        <td><?php echo $dados['sexo_assistido']; ?></td>
-                                        <td><?php echo $dados['email_assistido']; ?></td>
+                                        <td><?php echo $dados['matricula']; ?></td>
+                                        <td><?php echo $dados['nome']; ?></td>
+                                        <td><?php echo $dados['email']; ?></td>
+                                        <td><?php echo $dados['instituicaoensino']; ?></td>
+                                       
                                         <td>
-                                            <a href="verAtendimento.php?id=<?php echo $dados['idatendimento']; ?>"
+                                            <a href="verAtividadeComplementar.php?id=<?php echo $dados['idestagiario']; ?>"
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>

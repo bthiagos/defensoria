@@ -101,7 +101,11 @@ include("conexao.php");
                     //SELECT
                     if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
-                        $sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
+                        //$sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
+                        $sql = "SELECT * 
+                                FROM usuario INNER JOIN atendimento 
+                                ON atendimento.idatendimento = usuario.idestagiario 
+                                WHERE atendimento.idatendimento = '$id'";
                         $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
                     endif;    
@@ -114,32 +118,33 @@ include("conexao.php");
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <td class="col-sm-2">Nº Atendimento: </td>
-                                        <td class="col-sm-8"><?php echo $dados['idatendimento']; ?></td>
+                                        <td class="col-sm-2">Matrícula: </td>
+                                        <td class="col-sm-8"><?php echo $dados['idestagiario']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Nome: </td>
-                                        <td><?php echo $dados['nome_assistido']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>CPF: </td>
-                                        <td><?php echo $dados['cpf_assistido']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sexo: </td>
-                                        <td><?php echo $dados['sexo_assistido']; ?></td>
+                                        <td><?php echo $dados['nome']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>E-mail: </td>
-                                        <td><?php echo $dados['email_assistido']; ?></td>
+                                        <td><?php echo $dados['email']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Área do Direito </td>
-                                        <td><?php echo $dados['idareadodireito']; ?></td>
+                                        <td>Tipo de Estagiário: </td>
+                                        <td><?php echo $dados['idtipoestagiario']; ?></td>
                                     </tr>
-                                    <td>Estagiário do Atendimento </td>
-                                    <td><?php echo $dados['idestagiario']; ?></td>
+                                    <td>Horário: </td>
+                                    <td><?php echo $dados['hora_estagiario']; ?></td>
                                     </tr>
+                                    </tr>
+                                    <td>Instituição de Ensino </td>
+                                    <td><?php echo $dados['instituicaoensino']; ?></td>
+                                    </tr>
+                                    </tr>
+                                    <td>Atendimentos</td>
+                                    <td><?php echo $dados['idatendimento']; ?></td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                             <div class="row">
@@ -147,7 +152,7 @@ include("conexao.php");
 
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="consultarAtendimento.php" class="btn btn-danger btn-block">
+                                    <a href="relAtividadeComplementar.php" class="btn btn-danger btn-block">
                                         <i class='fa fa-arrow-left'></i>
                                         Voltar</a>
                                 </div>
