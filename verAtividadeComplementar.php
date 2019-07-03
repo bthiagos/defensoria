@@ -119,7 +119,7 @@ include("conexao.php");
                                 <tbody>
                                     <tr>
                                         <td class="col-sm-2">Matrícula: </td>
-                                        <td class="col-sm-8"><?php echo $dados['idestagiario']; ?></td>
+                                        <td class="col-sm-8"><?php echo $dados['matricula']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Nome: </td>
@@ -133,16 +133,16 @@ include("conexao.php");
                                         <td>Tipo de Estagiário: </td>
                                         <td><?php echo $dados['idtipoestagiario']; ?></td>
                                     </tr>
-                                    <td>Horário: </td>
-                                    <td><?php echo $dados['hora_estagiario']; ?></td>
+                                        <td>Horário: </td>
+                                        <td><?php echo $dados['hora_estagiario']; ?></td>
                                     </tr>
                                     </tr>
-                                    <td>Instituição de Ensino </td>
-                                    <td><?php echo $dados['instituicaoensino']; ?></td>
+                                        <td>Instituição de Ensino </td>
+                                        <td><?php echo $dados['instituicaoensino']; ?></td>
                                     </tr>
                                     </tr>
-                                    <td>Atendimentos</td>
-                                    <td><?php echo $dados['idatendimento']; ?></td>
+                                        <td>Atendimentos</td>
+                                        <td><?php echo $dados['idatendimento']; ?></td>
                                     </tr>
 
                                 </tbody>
