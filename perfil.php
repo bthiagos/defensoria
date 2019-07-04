@@ -94,18 +94,14 @@ include("conexao.php");
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Visualizar Atendimento
+                    Perfil do Usuário
                 </div>
                 <div class="panel-body">
                     <?php
                     //SELECT
                     if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
-                        //$sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
-                        $sql = "SELECT * 
-                                FROM usuario INNER JOIN atendimento 
-                                ON atendimento.idatendimento = usuario.idestagiario 
-                                WHERE atendimento.idatendimento = '$id'";
+                        $sql = "SELECT * FROM usuario WHERE idestagiario = '$id'";
                         $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
                     endif;    
@@ -130,21 +126,20 @@ include("conexao.php");
                                         <td><?php echo $dados['email']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Tipo de Estagiário: </td>
+                                        <td>Tipo do Estágio: </td>
                                         <td><?php echo $dados['idtipoestagiario']; ?></td>
                                     </tr>
-                                        <td>Expediente: </td>
+                                    <tr>
+                                        <td>Instituição de Ensino: </td>
+                                        <td><?php echo $dados['instituicaodeensino']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total de Horas: </td>
                                         <td><?php echo $dados['hora_estagiario']; ?></td>
                                     </tr>
-                                    </tr>
-                                        <td>Instituição de Ensino </td>
-                                        <td><?php echo $dados['instituicaoensino']; ?></td>
-                                    </tr>
-                                    </tr>
-                                        <td>Atendimentos</td>
+                                        <td>Atendimentos:</td>
                                         <td><?php echo $dados['idatendimento']; ?></td>
                                     </tr>
-
                                 </tbody>
                             </table>
                             <div class="row">
@@ -152,7 +147,7 @@ include("conexao.php");
 
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="relAtividadeComplementar.php" class="btn btn-danger btn-block">
+                                    <a href="consultarAtendimento.php" class="btn btn-danger btn-block">
                                         <i class='fa fa-arrow-left'></i>
                                         Voltar</a>
                                 </div>
@@ -165,7 +160,6 @@ include("conexao.php");
         </div>
 
     </section>
-
     <script src="https://ajasx.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
