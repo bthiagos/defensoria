@@ -98,17 +98,11 @@ include("conexao.php");
                 </div>
                 <div class="panel-body">
                     <?php
-                    //SELECT
-                    if(isset($_GET['id'])):
-                        $id = mysqli_escape_string($conexao, $_GET['id']);
-                        $sql = "SELECT * FROM usuario WHERE idestagiario = '$id'";
-                        $resultado = mysqli_query($conexao, $sql);
-                        $dados =  mysqli_fetch_array($resultado);
-                    endif;    
-                     ?>
-
-                    <div class="row">
-                    </div>
+                    $sql = "SELECT * FROM usuario";
+                    $resultado = mysqli_query($conexao, $sql);
+                    $dados =  mysqli_fetch_array($resultado); 
+                    ?>
+                        
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-striped">
@@ -131,7 +125,7 @@ include("conexao.php");
                                     </tr>
                                     <tr>
                                         <td>Instituição de Ensino: </td>
-                                        <td><?php echo $dados['instituicaodeensino']; ?></td>
+                                        <td><?php echo $dados['instituicaoensino']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Total de Horas: </td>
@@ -145,11 +139,6 @@ include("conexao.php");
                             <div class="row">
                                 <div class="col-sm-10">
 
-                                </div>
-                                <div class="col-sm-2">
-                                    <a href="consultarAtendimento.php" class="btn btn-danger btn-block">
-                                        <i class='fa fa-arrow-left'></i>
-                                        Voltar</a>
                                 </div>
                             </div>
                         </div>
