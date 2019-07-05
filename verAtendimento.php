@@ -99,12 +99,15 @@ include("conexao.php");
                 <div class="panel-body">
                     <?php
                     //SELECT
-                    if(isset($_GET['id'])):
-                        $id = mysqli_escape_string($conexao, $_GET['id']);
-                        $sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
+                    //if(isset($_GET['id'])):
+                      //  $id = mysqli_escape_string($conexao, $_GET['id']);
+                       // $sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
+                        $sql = "SELECT * FROM atendimento 
+                        INNER JOIN usuario 
+                        ON atendimento.idestagiario = 'usuario.idestagiario'";
                         $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
-                    endif;    
+                    //endif;    
                      ?>
 
                     <div class="row">
