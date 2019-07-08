@@ -90,7 +90,7 @@ include("conexao.php");
 						><img
 						src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg"
 						class="avatar" alt="Avatar"/>
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -130,7 +130,7 @@ include("conexao.php");
                         unset($_SESSION['status_atendimento']);
                         ?>
                         <?php
-                        if(isset($_SESSION['assistido_existe'])):
+                        if(isset($_SESSION['atendimento_existe'])):
                         ?>
 
                         <div class="alert alert-danger" role="alert">
@@ -140,7 +140,7 @@ include("conexao.php");
 
                         <?php
                         endif;
-                        unset($_SESSION['assistido_existe']);
+                        unset($_SESSION['atendimento_existe']);
                         ?>
                         <div class="form-group">
                             <div class="col-md-11 control-label">
@@ -232,18 +232,19 @@ include("conexao.php");
 
                             <div class="col-md-3">
                                 <?php
-                                    $sql = "SELECT * FROM areadodireito";
+                                    $sql = "SELECT * FROM area_do_direito";
                                     $resultado = mysqli_query($conexao, $sql);
                                 ?>
 
 
-                                <select required id="dominioDireito" name="idareadodireito" class="form-control">
+                                <!--<select name="id_direito" class="form-control">-->
+                                <select required id="id_direito" name="id_direito" class="form-control">
                                     <option value="">Selecione uma área do direito</option>
                                     <?php 
                                         while($dados = mysqli_fetch_array($resultado)):
                                     ?>
-                                    <option value="<?php echo $dados['idareadodireito'] ?>">
-                                        <?php echo $dados['tipodireito'] ?></option>
+                                    <option value="<?php echo $dados['id_direito'] ?>">
+                                        <?php echo $dados['nome_direito'] ?></option>
                                     <?php
                                         endwhile;
                                     ?>
@@ -257,8 +258,8 @@ include("conexao.php");
                             </label>
                             <div class="col-md-3">
                                 <select required id="estagiario" name="estagiario" class="form-control">
-                                    <option value="<?php echo $_SESSION['idestagiario'];?> ">
-                                        <?php echo $_SESSION['nome'];?> </option>
+                                    <option value="<?php echo $_SESSION['id_func'];?> ">
+                                        <?php echo $_SESSION['nome_func'];?> </option>
 
 
                                 </select>

@@ -73,7 +73,7 @@ include("conexao.php");
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
                             src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
                             alt="Avatar" />
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -97,7 +97,7 @@ include("conexao.php");
                     Atendimento Inicial
                 </div>
                 <div class="panel-body">
-                    Seja bem-vindo, <?php echo $_SESSION['nome'];?>
+                    Seja bem-vindo, <?php echo $_SESSION['nome_func'];?>
                     <hr><br />
                     <div class="row">
                         <div class="col-sm-3"></div>

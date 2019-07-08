@@ -69,10 +69,10 @@ session_start();
               unset($_SESSION['nao_autenticado']);
             ?>
             <div class="form-group">
-                <input name="matricula" type="number" class="form-control" placeholder="Matrícula" required="required">
+                <input name="mat_func" type="number" class="form-control" placeholder="Matrícula" required="required">
             </div>
             <div class="form-group">
-                <input name="senha" type="password" class="form-control" placeholder="Senha" required="required">
+                <input name="senha_func" type="password" class="form-control" placeholder="Senha" required="required">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Login</button>

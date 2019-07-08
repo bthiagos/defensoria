@@ -2,23 +2,25 @@
 session_start();
 include("conexao.php");
 
-$nome_assistido = mysqli_real_escape_string($conexao, trim($_POST['nome_assistido']));
-$sexo_assistido = mysqli_real_escape_string($conexao, trim($_POST['sexo_assistido']));
-$cpf_assistido = mysqli_real_escape_string($conexao, trim($_POST['cpf_assistido']));
-$estadocivil_assistido = mysqli_real_escape_string($conexao, trim($_POST['estadocivil_assistido']));
-$email_assistido = mysqli_real_escape_string($conexao, trim($_POST['email_assistido']));
+$rg_ass = mysqli_real_escape_string($conexao, trim($_POST['rg_ass']));
+$nome_ass = mysqli_real_escape_string($conexao, trim($_POST['nome_ass']));
+$email_ass = mysqli_real_escape_string($conexao, trim($_POST['email_ass']));
+$telefone_ass = mysqli_real_escape_string($conexao, trim($_POST['telefone_ass']));
+$sexo_ass = mysqli_real_escape_string($conexao, trim($_POST['sexo_ass']));
 
-$sql = "select count(*) as total from assistido where idassistido = '$cpf_assistido'";
+$sql = "select count(*) as total from assistido where rg_ass = '$rg_ass'";
 $result = mysqli_query($conexao, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if($row['total'] == 1) {
-	$_SESSION['cpf_assistido_existe'] = true;
+	$_SESSION['rg_assistido_existe'] = true;
 	header('Location: cadastroAssistido.php');
 	exit;
 }
 
-$sql = "INSERT INTO assistido (nome_assistido,sexo_assistido, cpf_assistido, estadocivil_assistido, email_assistido, data_cadastro) VALUES ('$nome_assistido','$sexo_assistido', '$cpf_assistido', '$estadocivil_assistido', '$email_assistido', NOW())";
+$sql = "INSERT INTO assistido (rg_ass, nome_ass, email_ass, telefone_ass, sexo_ass) 
+								VALUES ('$rg_ass','$nome_ass', '$email_ass', 
+										'$telefone_ass', '$sexo_ass";
 
 if($conexao->query($sql) === TRUE) {
 	$_SESSION['status_cadastroAssistido'] = true;

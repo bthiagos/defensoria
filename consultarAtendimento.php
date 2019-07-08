@@ -141,7 +141,9 @@ include("conexao.php");
                                     $sql = "SELECT * FROM atendimento";
                                     $resultado = mysqli_query($conexao, $sql);
                                     while($dados = mysqli_fetch_array($resultado)):
+                                        
                                     ?>
+                                    
                                     <tr>
                                         <td><?php echo $dados['idatendimento']; ?></td>
                                         <td><?php echo $dados['nome_assistido']; ?></td>
