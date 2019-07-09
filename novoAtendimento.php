@@ -131,14 +131,28 @@ include("conexao.php");
                             </div>
                         </div>
 
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="nome_assistido"><h11>*</h11>
-                            </label>
-                            <div class="col-md-8">
-                                <input id="nome_assistido" name="nome_assistido" placeholder=""
-                                    class="form-control input-md" required="" type="text">
-                            </div>
+                        <!-- FUNCIONARIO -->
+                        <div class="col-md-3">
+                            <?php
+                                    $sql = "SELECT * FROM atendimento 
+                                            INNER JOIN funcionario 
+                                            ON atendimento.MAT_FUNC = funcionario.MAT_FUNC
+                                            INNER JOIN assistido
+                                            ON atendimento.RG_ASS = assistido.RG_ASS;";
+                                    $resultado = mysqli_query($conexao, $sql);
+                                ?>
+                            
+                            <select required id="rg_ass" name="rg_ass" class="form-control">
+                                <option value="">Selecione o Assistido</option>
+                                <?php 
+                                        while($dados = mysqli_fetch_array($resultado)):
+                                    ?>
+                                <option value="<?php echo $dados['rg_ass'] ?>">
+                                    <?php echo $dados['nome_ass'] ?></option>
+                                <?php
+                                        endwhile;
+                                    ?>
+                            </select>
                         </div>
 
                         <!-- Text input-->
