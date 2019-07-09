@@ -90,7 +90,7 @@ include("conexao.php");
 						><img
 						src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg"
 						class="avatar" alt="Avatar"/>
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -130,7 +130,7 @@ include("conexao.php");
                                     <tr>
                                         <th>Nº Atendimento</th>
                                         <th>Nome</th>
-                                        <th>CPF</th>
+                                        <th>RG</th>
                                         <th>Sexo</th>
                                         <th>E-mail</th>
                                         <th>Ações</th>
@@ -145,7 +145,7 @@ include("conexao.php");
                                     ?>
                                     
                                     <tr>
-                                        <td><?php echo $dados['idatendimento']; ?></td>
+                                        <td><?php echo $dados['id_atendimento']; ?></td>
                                         <td><?php echo $dados['nome_assistido']; ?></td>
                                         <td><?php echo $dados['cpf_assistido']; ?></td>
                                         <td><?php echo $dados['sexo_assistido']; ?></td>

@@ -18,9 +18,9 @@ if($row['total'] == 1) {
 	exit;
 }
 
-$sql = "INSERT INTO assistido (rg_ass, nome_ass, email_ass, telefone_ass, sexo_ass) 
-								VALUES ('$rg_ass','$nome_ass', '$email_ass', 
-										'$telefone_ass', '$sexo_ass";
+$sql = "INSERT INTO assistido (nome_ass, sexo_ass, rg_ass, telefone_ass, email_ass) 
+								VALUES ('$nome_ass','$sexo_ass', '$rg_ass',
+										'$telefone_ass', '$email_ass')";
 
 if($conexao->query($sql) === TRUE) {
 	$_SESSION['status_cadastroAssistido'] = true;

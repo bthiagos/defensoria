@@ -24,7 +24,7 @@ include("conexao.php");
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
+<nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -41,16 +41,24 @@ include("conexao.php");
                 <li class="nav-item active">
                     <a href="painel.php" class="nav-link">Atendimento</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Desempenho</a>
+                            <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
                         </li>
                         <li>
                             <a href="relAtividadeComplementar.php" class="dropdown-item">Relatório de Atividade
@@ -61,19 +69,12 @@ include("conexao.php");
             </ul>
 
             <ul class="nav navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link notifications"><i class="fa fa-bell-o"></i><span
-                            class="badge">1</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link messages"><i class="fa fa-envelope-o"></i><span
-                            class="badge">10</span></a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                        <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
                             alt="Avatar" />
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -89,7 +90,6 @@ include("conexao.php");
             </ul>
         </div>
     </nav>
-
     <section id="painel">
         <div class="container">
             <div class="panel panel-primary">
@@ -101,8 +101,9 @@ include("conexao.php");
                     //SELECT
                     if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
-                        $sql = "SELECT * FROM atendimento WHERE idatendimento = '$id'";
-                        $resultado = mysqli_query($conexao, $sql);
+                        $sql = "SELECT * FROM atendimento WHERE id_atendimento = '$id'";
+                        $sql2 = "SELECT * FROM atendimento JOIN assistido";
+                        $resultado = mysqli_query($conexao, $sql, $sql2);
                         $dados =  mysqli_fetch_array($resultado);
                     endif;    
                      ?>
@@ -115,23 +116,23 @@ include("conexao.php");
                                 <tbody>
                                     <tr>
                                         <td class="col-sm-2">Nº Atendimento: </td>
-                                        <td class="col-sm-8"><?php echo $dados['idatendimento']; ?></td>
+                                        <td class="col-sm-8"><?php echo $dados['id_atendimento']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Nome: </td>
-                                        <td><?php echo $dados['nome_assistido']; ?></td>
+                                        <td><?php echo $dados['nome_ass']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>CPF: </td>
-                                        <td><?php echo $dados['cpf_assistido']; ?></td>
+                                        <td>RG: </td>
+                                        <td><?php echo $dados['rg_ass']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Sexo: </td>
-                                        <td><?php echo $dados['sexo_assistido']; ?></td>
+                                        <td><?php echo $dados['sexo_ass']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>E-mail: </td>
-                                        <td><?php echo $dados['email_assistido']; ?></td>
+                                        <td><?php echo $dados['email_ass']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Área do Direito </td>
