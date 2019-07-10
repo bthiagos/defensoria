@@ -122,15 +122,15 @@ include("conexao.php");
                                         <td class="col-sm-8"><?php echo $dados['ID_ATENDIMENTO']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Nome: </td>
+                                        <td>Nome:</td>
                                         <td><?php echo $dados['NOME_ASS']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>RG: </td>
+                                        <td>RG:</td>
                                         <td><?php echo $dados['RG_ASS']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Sexo: </td>
+                                        <td>Sexo:</td>
                                         <td><?php echo $dados['SEXO_ASS']; ?></td>
                                     </tr>
                                     <tr>
@@ -138,11 +138,19 @@ include("conexao.php");
                                         <td><?php echo $dados['EMAIL_ASS']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Área do Direito </td>
-                                        <td><?php echo $dados['ID_DIREITO']; ?></td>
+                                        <td>Área do Direito:</td>
+                                        <td><?php echo $dados['NOME_DIREITO']; ?></td>
                                     </tr>
-                                    <td>Estagiário do Atendimento </td>
-                                    <td><?php echo $dados['MAT_FUNC']; ?></td>
+                                    <tr>
+                                        <td>Prioridade:</td>
+                                        <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Comentário:</td>
+                                        <td><?php echo $dados['COMENTARIO_ATENDIMENTO']; ?></td>
+                                    </tr>
+                                    <td>Estagiário:</td>
+                                    <td><?php echo $dados['NOME_FUNC']; ?></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -153,13 +153,13 @@ include("conexao.php");
                                             $resultado = mysqli_query($conexao, $sql);
                                         ?>
 
-                                        <select name="id_tipo_func" class="form-control">
+                                        <select name="ID_TIPO_FUNC" class="form-control">
                                             <option value="">Selecione o tipo do Estagiário</option>
                                             <?php
                                                 while($dados = mysqli_fetch_array($resultado)):
                                             ?>
-                                            <option value="<?php echo $dados['id_tipo_func']; ?>">
-                                                <?php echo $dados['cargo_func']; ?>
+                                            <option value="<?php echo $dados['ID_TIPO_FUNC']; ?>">
+                                                <?php echo $dados['CARGO_FUNC']; ?>
                                             </option>
                                             <?php
                                                 endwhile;
@@ -187,7 +187,7 @@ include("conexao.php");
                                         <label for=" Horario de Estagiário">Horário do Estagiário<h11>*</h11></label>
                                         <select required id="hora_estagiario" name="hora_expediente_func"
                                             class="form-control">
-                                            <option value=""></option>
+                                            <option value="">Selecione o horário de expediente</option>
                                             <option name="hora_est_contratado_1" value="2019-07-10 07:00:00"
                                                 class="est_contratado">seg à sex
                                                 | 07:00 - 13:00</option>

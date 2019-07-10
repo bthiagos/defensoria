@@ -7,24 +7,24 @@ include("conexao.php");
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portal Defensoria</title>
-  <link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="icon" href="img/favicon16x16.ico" sizes="16x16">
-  <link rel="icon" href="img/favicon32x32.ico" sizes="32x32">
-  <link rel="icon" href="img/favicon48x48.ico" sizes="48x48">
-  <link rel="icon" href="img/favicon64x64.ico" sizes="64x64">
-  <link rel="icon" href="img/favicon128x128.ico" sizes="128x128">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portal Defensoria</title>
+    <link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" href="img/favicon16x16.ico" sizes="16x16">
+    <link rel="icon" href="img/favicon32x32.ico" sizes="32x32">
+    <link rel="icon" href="img/favicon48x48.ico" sizes="48x48">
+    <link rel="icon" href="img/favicon64x64.ico" sizes="64x64">
+    <link rel="icon" href="img/favicon128x128.ico" sizes="128x128">
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -120,29 +120,40 @@ include("conexao.php");
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM atendimento";
+                                    //$sql = "SELECT * FROM atendimento";
+                                    $sql = "SELECT * FROM atendimento 
+                                    INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
+                                    INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
+                                    INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIR";
                                     $resultado = mysqli_query($conexao, $sql);
                                     while($dados = mysqli_fetch_array($resultado)):  
                                     ?>
-                                    
+
                                     <tr>
-                                        <td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
+                                        <!--<td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
                                         <td><?php echo $dados['RG_ASS']; ?></td>
                                         <td><?php echo $dados['MAT_FUNC']; ?></td>
                                         <td><?php echo $dados['ID_DIR']; ?></td>
+                                        <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>-->
+                                        
+                                        <td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
+                                        <td><?php echo $dados['NOME_ASS']; ?></td>
+                                        <td><?php echo $dados['NOME_FUNC']; ?></td>
+                                        <td><?php echo $dados['NOME_DIREITO']; ?></td>
                                         <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>
                                         <td>
                                             <a href="verAtendimento.php?id=<?php echo $dados['ID_ATENDIMENTO']; ?>"
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>
-                                           <!-- <a href="#myModal<?php echo $dados['idatendimento']; ?>"
+                                            <!-- <a href="#myModal<?php echo $dados['idatendimento']; ?>"
                                                 class="btn btn-danger btn-custom"
                                                 data-toggle="modal" data-target="#myModal">
                                                 <i class="material-icons">delete</i></a>-->
                                         </td>
                                         <!-- Modal -->
-                                        <div id="myModal<?php echo $dados['idatendimento']; ?>" class="modal fade" role="dialog">
+                                        <div id="myModal<?php echo $dados['idatendimento']; ?>" class="modal fade"
+                                            role="dialog">
                                             <div class="modal-dialog">
 
                                                 <!-- Modal content-->

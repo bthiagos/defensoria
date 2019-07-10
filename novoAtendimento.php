@@ -102,7 +102,6 @@ include("conexao.php");
                     <?php
                     if(isset($_SESSION['status_atendimento'])):
                     ?>
-                    <!--<p>Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>-->
                     <div class="alert alert-sucess" role="alert">
                         <h5 class="alert-heading">Atendimento efetuado!</h5>
                         <p class="mb-0">Consulte <a href="consultarAtendimento.php">aqui</a></p>
@@ -112,18 +111,7 @@ include("conexao.php");
                     endif;
                     unset($_SESSION['status_atendimento']);
                     ?>
-                    <?php
-                    if(isset($_SESSION['atendimento_existe'])):
-                    ?>
-                    <!--<p>O usuário escolhido já existe. Informe outro e tente novamente.</p>-->
-                    <div class="alert alert-danger" role="alert">
-                        <p class="mb-0">O atendimento já existe. Informe outro e tente novamente.</p>
-                    </div>
-
-                    <?php
-                    endif;
-                    unset($_SESSION['atendimento_existe']);
-                    ?>
+                 
                     <div class="box">
                         <form action="cadastrar_atendimento.php" method="POST">
                             <div class="row">
@@ -131,9 +119,8 @@ include("conexao.php");
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo Obrigatório *</div>
                             </div>
                             <br />
-                            <!--          NOVO FORM           -->
 
-                            <!-- matrícula  -->
+                            <!-- Assistido -->
                             <div class="row">
                                 <div class="form-group">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
@@ -168,10 +155,10 @@ include("conexao.php");
                                     <select required id="direito" name="id_direito" class="form-control">
                                         <option value="">Selecione a Área do Direito</option>
                                         <?php
-                                                while($dados2 = mysqli_fetch_array($resultado)):
+                                                while($dados = mysqli_fetch_array($resultado)):
                                             ?>
-                                        <option value="<?php echo $dados2['ID_DIREITO']; ?>">
-                                            <?php echo $dados2['NOME_DIREITO']; ?>
+                                        <option value="<?php echo $dados['ID_DIREITO']; ?>">
+                                            <?php echo $dados['NOME_DIREITO']; ?>
                                         </option>
                                         <?php
                                                 endwhile;
@@ -215,10 +202,10 @@ include("conexao.php");
                                 <select required id="funcionario" name="mat_func" class="form-control">
                                     <option value="">Selecione o Estagiário</option>
                                     <?php
-                                        while($dados3 = mysqli_fetch_array($resultado)):
+                                        while($dados = mysqli_fetch_array($resultado)):
                                     ?>
-                                    <option value="<?php echo $dados3['MAT_FUNC']; ?>">
-                                        <?php echo $dados3['NOME_FUNC']; ?>
+                                    <option value="<?php echo $dados['MAT_FUNC']; ?>">
+                                        <?php echo $dados['NOME_FUNC']; ?>
                                     </option>
                                     <?php
                                         endwhile;
