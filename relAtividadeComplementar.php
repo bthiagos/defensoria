@@ -132,7 +132,7 @@ include("conexao.php");
                                         <td><?php echo $dados['instituicao_func']; ?></td>
 
                                         <td>
-                                            <a href="verAtividadeComplementar.php?id=<?php echo $dados['id_func']; ?>"
+                                            <a href="verAtividadeComplementar.php?id=<?php echo $dados['mat_func']; ?>"
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>

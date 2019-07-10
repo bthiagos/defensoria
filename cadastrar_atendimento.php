@@ -8,7 +8,7 @@ $comentario_atendimento = mysqli_real_escape_string($conexao, trim($_POST['comen
 $id_dir = mysqli_real_escape_string($conexao, trim($_POST['id_dir']));
 $mat_func = mysqli_real_escape_string($conexao, trim($_POST['id_func']));
 
-$sql = "select count(*) as total from atendimento where RG_ASS = '$rg_ass'";
+$sql = "select count(*) as total from atendimento where rg_ass = '$rg_ass'";
 $result = mysqli_query($conexao, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -17,10 +17,10 @@ if($row['total'] == 1) {
 	header('Location: novoAtendimento.php');
 	exit;
 }
-$sql = "INSERT INTO atendimento (rg_ass, prioridade_atendimento, comentario_atendimento,
-								id_dir, mat_func) 
-								VALUES ('$rg_ass', '$prioridade_atendimento', '$comentario_atendimento',
-								'$id_dir', '$mat_func')";
+$sql = "INSERT INTO atendimento (rg_ass, id_dir, prioridade_atendimento, 
+								mat_func, comentario_atendimento) 
+								VALUES ('$rg_ass', '$id_dir', '$prioridade_atendimento', 
+								'$mat_func', '$comentario_atendimento')";
 
 if($conexao->query($sql) === TRUE) {
 	$_SESSION['status_atendimento'] = true;

@@ -41,16 +41,24 @@ include("conexao.php");
                 <li class="nav-item active">
                     <a href="painel.php" class="nav-link">Atendimento</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Desempenho</a>
+                            <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
                         </li>
                         <li>
                             <a href="relAtividadeComplementar.php" class="dropdown-item">Relatório de Atividade
@@ -61,17 +69,10 @@ include("conexao.php");
             </ul>
 
             <ul class="nav navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link notifications"><i class="fa fa-bell-o"></i><span
-                            class="badge">1</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link messages"><i class="fa fa-envelope-o"></i><span
-                            class="badge">10</span></a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                        <img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
                             alt="Avatar" />
                         <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
@@ -89,342 +90,177 @@ include("conexao.php");
             </ul>
         </div>
     </nav>
-
     <!-- Atendimento Inicial -->
-    <section>
-        <form class="form-horizontal" action="cadastrar_atendimento.php" method="POST">
-            <fieldset>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Cadastro de Atendimento</div>
+    <section id="painel">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Novo Atendimento
+                </div>
+                <div class="panel-body">
+                    <br />
+                    <?php
+                    if(isset($_SESSION['status_atendimento'])):
+                    ?>
+                    <!--<p>Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>-->
+                    <div class="alert alert-sucess" role="alert">
+                        <h5 class="alert-heading">Atendimento efetuado!</h5>
+                        <p class="mb-0">Consulte <a href="consultarAtendimento.php">aqui</a></p>
+                    </div>
 
-                    <div class="panel-body">
-                        <?php
-                        if(isset($_SESSION['status_atendimento'])):
-                        ?>
+                    <?php
+                    endif;
+                    unset($_SESSION['status_atendimento']);
+                    ?>
+                    <?php
+                    if(isset($_SESSION['atendimento_existe'])):
+                    ?>
+                    <!--<p>O usuário escolhido já existe. Informe outro e tente novamente.</p>-->
+                    <div class="alert alert-danger" role="alert">
+                        <p class="mb-0">O atendimento já existe. Informe outro e tente novamente.</p>
+                    </div>
 
-                        <div class="alert alert-sucess" role="alert">
-                            <h5 class="alert-heading">Cadastro de Atendimento Realizado com Sucesso!</h5>
-                        </div>
-
-                        <?php
-                        endif;
-                        unset($_SESSION['status_atendimento']);
-                        ?>
-                        <?php
-                        if(isset($_SESSION['atendimento_existe'])):
-                        ?>
-
-                        <div class="alert alert-danger" role="alert">
-                            <p class="mb-0">Atendimento para este usuário já existe. Informe outro e tente novamente.
-                            </p>
-                        </div>
-
-                        <?php
-                        endif;
-                        unset($_SESSION['atendimento_existe']);
-                        ?>
-                        <div class="form-group">
-                            <div class="col-md-11 control-label">
-                                <p class="help-block">
-                                    <h11>*</h11> Campo Obrigatório
-                                </p>
+                    <?php
+                    endif;
+                    unset($_SESSION['atendimento_existe']);
+                    ?>
+                    <div class="box">
+                        <form action="cadastrar_atendimento.php" method="POST">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo Obrigatório *</div>
                             </div>
-                        </div>
+                            <br />
+                            <!--          NOVO FORM           -->
 
-                        <!-- FUNCIONARIO -->
-                        <div class="col-md-3">
-                            <?php
-                                    $sql = "SELECT * FROM atendimento 
-                                            INNER JOIN funcionario 
-                                            ON atendimento.MAT_FUNC = funcionario.MAT_FUNC
-                                            INNER JOIN assistido
-                                            ON atendimento.RG_ASS = assistido.RG_ASS;";
-                                    $resultado = mysqli_query($conexao, $sql);
-                                ?>
-                            
-                            <select required id="rg_ass" name="rg_ass" class="form-control">
-                                <option value="">Selecione o Assistido</option>
-                                <?php 
-                                        while($dados = mysqli_fetch_array($resultado)):
-                                    ?>
-                                <option value="<?php echo $dados['rg_ass'] ?>">
-                                    <?php echo $dados['nome_ass'] ?></option>
-                                <?php
-                                        endwhile;
-                                    ?>
-                            </select>
-                        </div>
+                            <!-- matrícula  -->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                        <label for="matricula">Assistido<h11>*</h11></label>
+                                        <?php
+                                            $sql = "SELECT * FROM assistido";
+                                            $resultado = mysqli_query($conexao, $sql);
+                                             ?>
+                                        <select required id="assistido" name="id_ass" class="form-control">
+                                            <option value="">Selecione o Assistido</option>
+                                            <?php
+                                                while($dados = mysqli_fetch_array($resultado)):
+                                                ?>
+                                            <option value="<?php echo $dados['ID_ASS']; ?>">
+                                                <?php echo $dados['NOME_ASS']; ?>
+                                            </option>
+                                            <?php
+                                                endwhile;
+                                                ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control"></div>
 
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="cpf_assistido">CPF <h11>*</h11></label>
-                            <div class="col-md-2">
-                                <input id="cpf_assistido" name="cpf_assistido" placeholder="Apenas números"
-                                    class="form-control input-md" required="" type="text" maxlength="11"
-                                    pattern="[0-9]+$">
-                            </div>
+                                <!-- Tipo do Estagiário -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
+                                    <label for="Tipo de Estagiário">Área do Direito <h11>*</h11></label>
+                                    <?php
+                                            $sql = "SELECT * FROM area_do_direito";
+                                            $resultado = mysqli_query($conexao, $sql);
+                                        ?>
+                                    <select required id="direito" name="id_direito" class="form-control">
+                                        <option value="">Selecione a Área do Direito</option>
+                                        <?php
+                                                while($dados2 = mysqli_fetch_array($resultado)):
+                                            ?>
+                                        <option value="<?php echo $dados2['ID_DIREITO']; ?>">
+                                            <?php echo $dados2['NOME_DIREITO']; ?>
+                                        </option>
+                                        <?php
+                                                endwhile;
+                                            ?>
+                                    </select>
 
-                            <div class="col-md-2">
-                                <!--<input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">-->
-                            </div>
-
-                            <!-- Multiple Radios (inline) -->
-
-                            <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
-                            <div class="col-md-4">
-                                <label required="" class="radio-inline" for="radios-0">
-                                    <input name="sexo_assistido" id="sexo_assistido" value="feminino" type="radio"
-                                        required>
-                                    Feminino
-                                </label>
-                                <label class="radio-inline" for="radios-1">
-                                    <input name="sexo_assistido" id="sexo_assistido" value="masculino" type="radio">
-                                    Masculino
-                                </label>
-                            </div>
-                        </div>
-
-
-                        <!-- Prepended text-->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="email_assistido">Email <h11>*</h11></label>
-                            <div class="col-md-5">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="email_assistido" name="email_assistido" class="form-control"
-                                        placeholder="email@email.com" required="" type="text"
-                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                                 </div>
                             </div>
-                        </div>
+                    </div>
 
+                    <br />
 
-
-                        <!-- Select Basic -->
+                    <!-- Nome Completo -->
+                    <div class="row">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="Estado Civil">Estado Civil <h11>*</h11></label>
-                            <div class="col-md-2">
-                                <select required id="estadocivil_assistido" name="estadocivil_assistido"
-                                    class="form-control">
-                                    <option value=""></option>
-                                    <option value="Solteiro(a)">Solteiro(a)</option>
-                                    <option value="Casado(a)">Casado(a)</option>
-                                    <option value="Divorciado(a)">Divorciado(a)</option>
-                                    <option value="Viuvo(a)">Viuvo(a)</option>
-                                </select>
-                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
+                                <label for="Prioridade">Prioridade do Atendimento <h11>*</h11> :</label>
 
-                            <!-- Prepended checkbox -->
-                            <div class="col-md-3">
+                                <label required="" class="radio-inline" for="radios-0">
+                                    <input name="prioridade" id="prioridade" value="Alta" type="radio" required>
+                                    Alta
+                                </label>
+                                <label class="radio-inline" for="radios-1">
+                                    <input name="prioridade" id="prioridade" value="Média" type="radio">
+                                    Média
+                                </label>
+                                <label class="radio-inline" for="radios-2">
+                                    <input name="prioridade" id="prioridade" value="Baixa" type="radio">
+                                    Baixa
+                                </label>
                             </div>
-                        </div>
-                        <!-- Select Basic -->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="selectbasic">Domínio do Direito <h11>*</h11>
-                            </label>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
 
-                            <div class="col-md-3">
+                            <!-- Horário do Estagiário -->
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
+                                <label for=" Horario de Estagiário">Estagiário do Atendimento<h11>*</h11></label>
                                 <?php
-                                    $sql = "SELECT * FROM area_do_direito";
+                                    $sql = "SELECT * FROM funcionario";
                                     $resultado = mysqli_query($conexao, $sql);
                                 ?>
-                                <!--<select name="id_direito" class="form-control">-->
-                                <select required id="id_direito" name="id_direito" class="form-control">
-                                    <option value="">Selecione uma área do direito</option>
-                                    <?php 
-                                        while($dados = mysqli_fetch_array($resultado)):
+                                <select required id="funcionario" name="mat_func" class="form-control">
+                                    <option value="">Selecione o Estagiário</option>
+                                    <?php
+                                        while($dados3 = mysqli_fetch_array($resultado)):
                                     ?>
-                                    <option value="<?php echo $dados['id_direito'] ?>">
-                                        <?php echo $dados['nome_direito'] ?></option>
+                                    <option value="<?php echo $dados3['MAT_FUNC']; ?>">
+                                        <?php echo $dados3['NOME_FUNC']; ?>
+                                    </option>
                                     <?php
                                         endwhile;
                                     ?>
                                 </select>
                             </div>
-                            <!-- Text input-->
-
-                            <label class="col-md-2 control-label" for="profissao">Estagiário do Atendimento<h11>*</h11>
-                            </label>
-                            <div class="col-md-3">
-                                <select required id="estagiario" name="estagiario" class="form-control">
-                                    <option value="<?php echo $_SESSION['id_func'];?> ">
-                                        <?php echo $_SESSION['nome_func'];?> </option>
-
-
-                                </select>
-                            </div>
                         </div>
-
-                        <!-- Button (Double) -->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="cadastrar_atendimento"></label>
-                            <div class="col-md-8">
-                                <button class="btn btn-success" type="Submit">Cadastrar</button>
-                                <button id="Cancelar" name="Cancelar" class="btn btn-danger"
-                                    type="Reset">Cancelar</button>
-                            </div>
-                        </div>
-
                     </div>
+
+                    <!--  -->
+                    <div class="row">
+                        <div class="form-group">
+
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
+                                <label for="comentario_atendimento">Comentário do Atendimento <h11>*</h11>
+                                </label>
+                                <textarea name="comentario_atendimento" type="text" class="form-control noresize"
+                                    required="true" id="comentario_atendimento" placeholder="Comentário do Atendimento"
+                                    rows="5"></textarea>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
+
+
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <!-- Botão de Envio / Cadastro -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary is-block is-link"> Atendimento
+                        </button>
+                    </div>
+                    </form>
+
+
                 </div>
+            </div>
+        </div>
+        </div>
 
-
-            </fieldset>
-        </form>
     </section>
-
-    <!-- JAVASCRIPT-->
-    <script type="text/javascript">
-    function limpa_formulario_cep() {
-        //Limpa valores do formulário de cep.
-        document.getElementById('rua').value = ("");
-        document.getElementById('bairro').value = ("");
-        document.getElementById('cidade').value = ("");
-        document.getElementById('estado').value = ("");
-
-    }
-
-    function meu_callback(conteudo) {
-        if (!("erro" in conteudo)) {
-            //Atualiza os campos com os valores.
-            document.getElementById('rua').value = (conteudo.logradouro);
-            document.getElementById('bairro').value = (conteudo.bairro);
-            document.getElementById('cidade').value = (conteudo.localidade);
-            document.getElementById('estado').value = (conteudo.uf);
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulario_cep();
-            alert("CEP não encontrado.");
-            document.getElementById('cep').value = ("");
-        }
-    }
-
-    function pesquisacep(valor) {
-
-        //Nova variável "cep" somente com dígitos.
-        var cep = valor.replace(/\D/g, '');
-
-        //Verifica se campo cep possui valor informado.
-        if (cep !== "") {
-
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-
-            //Valida o formato do CEP.
-            if (validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value = "...";
-                document.getElementById('bairro').value = "...";
-                document.getElementById('cidade').value = "...";
-                document.getElementById('estado').value = "...";
-
-                //Cria um elemento javascript.
-                var script = document.createElement('script');
-
-                //Sincroniza com o callback.
-                script.src = '//viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
-
-                //Insere script no documento e carrega o conteúdo.
-                document.body.appendChild(script);
-
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulario_cep();
-                alert("Formato de CEP inválido.");
-            }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulario_cep();
-        }
-    }
-
-    function formatar(mascara, documento) {
-        var i = documento.value.length;
-        var saida = mascara.substring(0, 1);
-        var texto = mascara.substring(i);
-
-        if (texto.substring(0, 1) != saida) {
-            documento.value += texto.substring(0, 1);
-        }
-
-    }
-
-    function idade() {
-        var data = document.getElementById("dtnasc").value;
-        var dia = data.substr(0, 2);
-        var mes = data.substr(3, 2);
-        var ano = data.substr(6, 4);
-        var d = new Date();
-        var ano_atual = d.getFullYear(),
-            mes_atual = d.getMonth() + 1,
-            dia_atual = d.getDate();
-
-        ano = +ano,
-            mes = +mes,
-            dia = +dia;
-
-        var idade = ano_atual - ano;
-
-        if (mes_atual < mes || mes_atual == mes_aniversario && dia_atual < dia) {
-            idade--;
-        }
-        return idade;
-    }
-
-
-    function exibe(i) {
-
-
-
-        document.getElementById(i).readOnly = true;
-
-
-
-
-    }
-
-    function desabilita(i) {
-
-        document.getElementById(i).disabled = true;
-    }
-
-    function habilita(i) {
-        document.getElementById(i).disabled = false;
-    }
-
-
-    function showhide() {
-        var div = document.getElementById("newpost");
-
-        if (idade() >= 18) {
-
-            div.style.display = "none";
-        } else if (idade() < 18) {
-            div.style.display = "inline";
-        }
-
-    }
-    </script>
-
-    <script>
-    $(function() {
-        var dominioDireitos = [
-            "Civel",
-            "Familia",
-            "Consumidor",
-            "BasFazenda Publica",
-            "Criminal",
-        ];
-        $("#dominioDireito1").autocomplete({
-            source: dominioDireitos
-        });
-    });
-    </script>
-
     <script src="https://ajasx.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

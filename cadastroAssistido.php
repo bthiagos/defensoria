@@ -126,8 +126,7 @@ include("conexao.php");
                         unset($_SESSION['rg_assistido_existe']);
                         ?>
                     <div class="box">
-                        <form data-toggle="validator" role="form" id="myForm" name="myForm"
-                            action="cadastrarAssistido.php" method="POST">
+                        <form action="cadastrarAssistido.php" method="POST">
                             <div class="row">
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo Obrigatório *</div>
@@ -166,7 +165,7 @@ include("conexao.php");
                                         <label class="control-label" for="rg_ass">RG <h11>*</h11>
                                         </label>
                                         <input id="rg_ass" name="rg_ass" placeholder="Apenas números"
-                                            class="form-control input-md" required="" type="text" maxlength="11"
+                                            class="form-control input-md" required="" type="text" maxlength="9"
                                             pattern="[0-9]+$">
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control"></div>

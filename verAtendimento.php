@@ -101,9 +101,12 @@ include("conexao.php");
                     //SELECT
                     if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
-                        $sql = "SELECT * FROM atendimento WHERE id_atendimento = '$id'";
-                        $sql2 = "SELECT * FROM atendimento JOIN assistido";
-                        $resultado = mysqli_query($conexao, $sql, $sql2);
+                        $sql = "SELECT * FROM atendimento 
+                        INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
+                        INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
+                        INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIR
+                        WHERE ID_ATENDIMENTO = '$id'";
+                        $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
                     endif;    
                      ?>
@@ -116,30 +119,30 @@ include("conexao.php");
                                 <tbody>
                                     <tr>
                                         <td class="col-sm-2">Nº Atendimento: </td>
-                                        <td class="col-sm-8"><?php echo $dados['id_atendimento']; ?></td>
+                                        <td class="col-sm-8"><?php echo $dados['ID_ATENDIMENTO']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Nome: </td>
-                                        <td><?php echo $dados['nome_ass']; ?></td>
+                                        <td><?php echo $dados['NOME_ASS']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>RG: </td>
-                                        <td><?php echo $dados['rg_ass']; ?></td>
+                                        <td><?php echo $dados['RG_ASS']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Sexo: </td>
-                                        <td><?php echo $dados['sexo_ass']; ?></td>
+                                        <td><?php echo $dados['SEXO_ASS']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>E-mail: </td>
-                                        <td><?php echo $dados['email_ass']; ?></td>
+                                        <td><?php echo $dados['EMAIL_ASS']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Área do Direito </td>
-                                        <td><?php echo $dados['idareadodireito']; ?></td>
+                                        <td><?php echo $dados['ID_DIREITO']; ?></td>
                                     </tr>
                                     <td>Estagiário do Atendimento </td>
-                                    <td><?php echo $dados['idestagiario']; ?></td>
+                                    <td><?php echo $dados['MAT_FUNC']; ?></td>
                                     </tr>
                                 </tbody>
                             </table>

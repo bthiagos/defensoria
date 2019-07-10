@@ -111,10 +111,10 @@ include("conexao.php");
                                 <thead>
                                     <tr>
                                         <th>Nº Atendimento</th>
-                                        <th>Nome</th>
-                                        <th>RG</th>
-                                        <th>Sexo</th>
-                                        <th>E-mail</th>
+                                        <th>Assistido</th>
+                                        <th>Estagiário</th>
+                                        <th>Área do Direito</th>
+                                        <th>Prioridade</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -122,18 +122,17 @@ include("conexao.php");
                                     <?php
                                     $sql = "SELECT * FROM atendimento";
                                     $resultado = mysqli_query($conexao, $sql);
-                                    while($dados = mysqli_fetch_array($resultado)):
-                                        
+                                    while($dados = mysqli_fetch_array($resultado)):  
                                     ?>
                                     
                                     <tr>
-                                        <td><?php echo $dados['id_atendimento']; ?></td>
-                                        <td><?php echo $dados['nome_assistido']; ?></td>
-                                        <td><?php echo $dados['cpf_assistido']; ?></td>
-                                        <td><?php echo $dados['sexo_assistido']; ?></td>
-                                        <td><?php echo $dados['email_assistido']; ?></td>
+                                        <td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
+                                        <td><?php echo $dados['RG_ASS']; ?></td>
+                                        <td><?php echo $dados['MAT_FUNC']; ?></td>
+                                        <td><?php echo $dados['ID_DIR']; ?></td>
+                                        <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>
                                         <td>
-                                            <a href="verAtendimento.php?id=<?php echo $dados['idatendimento']; ?>"
+                                            <a href="verAtendimento.php?id=<?php echo $dados['ID_ATENDIMENTO']; ?>"
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>

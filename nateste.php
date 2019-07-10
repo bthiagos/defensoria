@@ -101,29 +101,29 @@ include("conexao.php");
                 <div class="panel-body">
                     <br />
                     <?php
-                    if(isset($_SESSION['status_cadastro'])):
+                    if(isset($_SESSION['status_atendimento'])):
                     ?>
                     <!--<p>Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>-->
                     <div class="alert alert-sucess" role="alert">
-                        <h5 class="alert-heading">Cadastro efetuado!</h5>
-                        <p class="mb-0">Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>
+                        <h5 class="alert-heading">Atendimento efetuado!</h5>
+                        <p class="mb-0">Consulte <a href="consultarAtendimento.php">aqui</a></p>
                     </div>
 
                     <?php
                     endif;
-                    unset($_SESSION['status_cadastro']);
+                    unset($_SESSION['status_atendimento']);
                     ?>
                     <?php
-                    if(isset($_SESSION['matricula_existe'])):
+                    if(isset($_SESSION['atendimento_existe'])):
                     ?>
                     <!--<p>O usuário escolhido já existe. Informe outro e tente novamente.</p>-->
                     <div class="alert alert-danger" role="alert">
-                        <p class="mb-0">O usuário escolhido já existe. Informe outro e tente novamente.</p>
+                        <p class="mb-0">O atendimento já existe. Informe outro e tente novamente.</p>
                     </div>
 
                     <?php
                     endif;
-                    unset($_SESSION['matricula_existe']);
+                    unset($_SESSION['atendimento_existe']);
                     ?>
                     <div class="box">
                         <form action="cadastrar.php" method="POST">
@@ -153,7 +153,7 @@ include("conexao.php");
                                             $resultado = mysqli_query($conexao, $sql);
                                         ?>
 
-                                        <select name="id_tipo_func" class="form-control">
+                                        <select required id="tipo_funcionario" name="id_tipo_func" class="form-control">
                                             <option value="">Selecione o tipo do Estagiário</option>
                                             <?php
                                                 while($dados = mysqli_fetch_array($resultado)):
@@ -188,22 +188,22 @@ include("conexao.php");
                                         <select required id="hora_estagiario" name="hora_expediente_func"
                                             class="form-control">
                                             <option value=""></option>
-                                            <option name="hora_est_contratado_1" value="2019-07-10 07:00:00"
+                                            <option name="hora_est_contratado_1" value="seg_a_sex_07_13"
                                                 class="est_contratado">seg à sex
                                                 | 07:00 - 13:00</option>
-                                            <option name="hora_est_contratado_2" value="2019-07-10 13:00:00"
+                                            <option name="hora_est_contratado_2" value="seg_a_sex_13_19"
                                                 class="est_contratado">seg à sex
                                                 | 13:00 - 19:00</option>
-                                            <option name="hora_est_voluntario_1_1" value="2019-07-10 19:00:00"
+                                            <option name="hora_est_voluntario_1_1" value="seg_qua_07_13"
                                                 class="est_voluntario">seg -
                                                 qua | 07:00 - 13:00</option>
-                                            <option name="hora_est_voluntario_1_2" value="2019-07-10 07:00:00"
+                                            <option name="hora_est_voluntario_1_2" value="seg_qua_13_19"
                                                 class="est_voluntario">seg -
                                                 qua | 13:00 - 19:00</option>
-                                            <option name="hora_est_voluntario_2_1" value="2019-07-10 13:00:00"
+                                            <option name="hora_est_voluntario_2_1" value="ter_qui_07_13"
                                                 class="est_voluntario">ter -
                                                 qui | 07:00 - 13:00</option>
-                                            <option name="hora_est_voluntario_2_2" value="2019-07-10 19:00:00"
+                                            <option name="hora_est_voluntario_2_2" value="ter_qui_13_19"
                                                 class="est_voluntario">ter -
                                                 qui | 13:00 - 19:00</option>
                                         </select>
@@ -259,7 +259,7 @@ include("conexao.php");
                             <br />
                             <!-- Botão de Envio / Cadastro -->
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary is-block is-link"> Cadastrar </button>
+                                <button type="submit" class="btn btn-primary is-block is-link"> Atendimento </button>
                             </div>
                         </form>
 
