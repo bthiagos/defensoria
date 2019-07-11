@@ -24,7 +24,7 @@ include("conexao.php");
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
+<nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -125,7 +125,7 @@ include("conexao.php");
                     endif;
                     unset($_SESSION['matricula_existe']);
                     ?>
-                    <div class="box" style="padding-left: 10px;">
+                    <div class="box">
                         <form action="cadastrar.php" method="POST">
                             <div class="row">
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
@@ -145,15 +145,8 @@ include("conexao.php");
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control"></div>
 
-                                    <!-- CPF FUNCIONARIO -->
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
-                                        <label for="CPF">CPF <h11>*</h11></label>
-                                        <input name="cpf_func" type="text" class="form-control" required="true"
-                                            id="cpf_func" placeholder="Digite seu CPF" min="00000000000"
-                                            max="99999999999" maxlength="11" pattern="[0-9]+$">
-                                    </div>
                                     <!-- Tipo do Estagiário -->
-                                    <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                         <label for="Tipo de Estagiário">Tipo do Estagiário <h11>*</h11></label>
                                         <?php
                                             $sql = "SELECT * FROM tipo_funcionario";
@@ -173,7 +166,7 @@ include("conexao.php");
                                             ?>
                                         </select>
 
-                                    </div>-->
+                                    </div>
                                 </div>
                             </div>
 
@@ -189,93 +182,7 @@ include("conexao.php");
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
 
-                                    <!-- RG FUNCIONARIO -->
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
-                                        <label for="RG">RG <h11>*</h11></label>
-                                        <input name="rg_func" type="text" class="form-control" required="true"
-                                            id="rg_func" placeholder="Digite seu RG" min="000000000" max="999999999"
-                                            maxlength="9" pattern="[0-9]+$">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <br />
-
-                            <!-- E-mail -->
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
-                                        <label for="Endereco">Endereço <h11>*</h11></label>
-                                        <input name="endereco_func" type="text" class="form-control" required="true"
-                                            id="endereco_func" placeholder="Digite seu endereço completo">
-                                    </div>
-
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
-
-                                    <!-- Tipo do Estagiário -->
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
-                                        <label for="Tipo de Estagiário">Tipo do Estagiário <h11>*</h11></label>
-                                        <select name="ID_TIPO_FUNC" class="form-control">
-                                            <option value="">Selecione o tipo do Estagiário</option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Estagiário Contratado</option>
-                                            <option value="3">Estagiário Voluntário</option>
-                                            
-                                        </select>
-                                        <!-- <?php
-                                            $sql = "SELECT * FROM tipo_funcionario";
-                                            $resultado = mysqli_query($conexao, $sql);
-                                        ?>
-
-                                        <select name="ID_TIPO_FUNC" class="form-control">
-                                            <option value="">Selecione o tipo do Estagiário</option>
-                                            <?php
-                                                while($dados = mysqli_fetch_array($resultado)):
-                                            ?>
-                                            <option value="<?php echo $dados['ID_TIPO_FUNC']; ?>">
-                                                <?php echo $dados['CARGO_FUNC']; ?>
-                                            </option>
-                                            <?php
-                                                endwhile;
-                                            ?>
-                                        </select>-->
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <br />
-                            <!-- Instituição de Ensino e  Matrícula da Instituição de Ensino-->
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
-                                        <label for="instituicaoensino">Instituição de Ensino <h11>*</h11></label>
-                                        <input name="instituicao_func" type="text" class="form-control" required="true"
-                                            id="instituicaoensino" placeholder="Instituição de Ensino">
-                                    </div>
-
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
-
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
-                                        <label for="matricula instituicao">Matrícula da Instituição de Ensino <h11>*
-                                            </h11></label>
-                                        <input name="matricula_inst_func" type="text" class="form-control"
-                                            required="true" id="matricula_inst_func" placeholder="Instituição de Ensino"
-                                            min="0000000000" max="9999999999" maxlength="10" pattern="[0-9]+$">
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <!-- EMAIL e HORÁRIO-->
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
-                                        <label for="email">E-mail <h11>*</h11></label>
-                                        <input name="email_func" type="email" class="form-control" required="true"
-                                            id="email" placeholder="Email">
-                                    </div>
-
-                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
+                                    <!-- Horário do Estagiário -->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                         <label for=" Horario de Estagiário">Horário do Estagiário<h11>*</h11></label>
                                         <select required id="hora_estagiario" name="hora_expediente_func"
@@ -306,7 +213,25 @@ include("conexao.php");
                                 </div>
                             </div>
                             <br />
+                            <!-- E-mail -->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
+                                        <label for="email">E-mail <h11>*</h11></label>
+                                        <input name="email_func" type="email" class="form-control" required="true"
+                                            id="email" placeholder="Email">
+                                    </div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
 
+                                    <!-- Horário do Estagiário -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
+                                        <label for="instituicaoensino">Instituição de Ensino <h11>*</h11></label>
+                                        <input name="instituicao_func" type="text" class="form-control" required="true"
+                                            id="instituicaoensino" placeholder="Instituição de Ensino">
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
                             <!-- Senha -->
                             <div class="row">
                                 <div class="form-group">
@@ -331,7 +256,7 @@ include("conexao.php");
                             </div>
 
 
-                            <br /><br /><br />
+                            <br />
                             <!-- Botão de Envio / Cadastro -->
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary is-block is-link"> Cadastrar </button>

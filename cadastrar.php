@@ -25,12 +25,14 @@ if($row['total'] == 1) {
 	exit;
 }
 
-$sql = "INSERT INTO funcionario (mat_func, nome_func, email_func, senha_func, cpf_func, rg_func,
-								endereco_func, hora_expediente_func, matricula_inst_func,
-								instituicao_func, id_tipo_func, data_cadastro_func) 
-								VALUES ('$mat_func', '$nome_func', '$email_func', '$senha_func', 
-								'$cpf_func', '$rg_func', '$endereco_func', '$hora_expediente_func',
-								'$matricula_inst_func', '$instituicao_func', '$id_tipo_func', NOW())";
+$sql = "INSERT INTO funcionario (mat_func, cpf_func, nome_func, rg_func, endereco_func,
+								id_tipo_func, instituicao_func, matricula_inst_func,
+								email_func, hora_expediente_func, senha_func, 		
+								data_cadastro_func) 
+								VALUES('$mat_func', '$cpf_func', '$nome_func','$rg_func',
+								'$endereco_func','$id_tipo_func','$instituicao_func',
+								'$matricula_inst_func','$email_func','$hora_expediente_func',
+								'$senha_func', NOW())";
 
 if($conexao->query($sql) === TRUE) {
 	$_SESSION['status_cadastro'] = true;
