@@ -120,19 +120,20 @@ include("conexao.php");
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $sql = "SELECT * FROM funcionario";
+                                <?php
+
+                                    $sql = "SELECT * FROM funcionario"; 
                                     $resultado = mysqli_query($conexao, $sql);
-                                    while($dados = mysqli_fetch_array($resultado)):
+                                    while($dados = mysqli_fetch_array($resultado)):  
                                     ?>
                                     <tr>
-                                        <td><?php echo $dados['mat_func']; ?></td>
-                                        <td><?php echo $dados['nome_func']; ?></td>
-                                        <td><?php echo $dados['email_func']; ?></td>
-                                        <td><?php echo $dados['instituicao_func']; ?></td>
+                                        <td><?php echo $dados['MAT_FUNC']; ?></td>
+                                        <td><?php echo $dados['NOME_FUNC']; ?></td>
+                                        <td><?php echo $dados['EMAIL_FUNC']; ?></td>
+                                        <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
 
                                         <td>
-                                            <a href="verAtividadeComplementar.php?id=<?php echo $dados['mat_func']; ?>"
+                                            <a href="verAtividadeComplementar.php?id=<?php echo $dados['MAT_FUNC']; ?>"
                                                 class="btn btn-success btn-custom">
                                                 <i class="material-icons">visibility</i>
                                             </a>

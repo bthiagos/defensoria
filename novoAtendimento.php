@@ -129,12 +129,12 @@ include("conexao.php");
                                             $sql = "SELECT * FROM assistido";
                                             $resultado = mysqli_query($conexao, $sql);
                                              ?>
-                                        <select required id="assistido" name="id_ass" class="form-control">
+                                        <select required id="assistido" name="RG_ASS" class="form-control">
                                             <option value="">Selecione o Assistido</option>
                                             <?php
                                                 while($dados = mysqli_fetch_array($resultado)):
                                                 ?>
-                                            <option value="<?php echo $dados['ID_ASS']; ?>">
+                                            <option value="<?php echo $dados['RG_ASS']; ?>">
                                                 <?php echo $dados['NOME_ASS']; ?>
                                             </option>
                                             <?php
@@ -145,24 +145,24 @@ include("conexao.php");
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control"></div>
 
-                                <!-- Tipo do Estagiário -->
+                                <!-- Área do Direito -->
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                     <label for="Tipo de Estagiário">Área do Direito <h11>*</h11></label>
                                     <?php
                                             $sql = "SELECT * FROM area_do_direito";
                                             $resultado = mysqli_query($conexao, $sql);
                                         ?>
-                                    <select required id="direito" name="id_direito" class="form-control">
+                                    <select required id="direito" name="ID_DIREITO" class="form-control">
                                         <option value="">Selecione a Área do Direito</option>
                                         <?php
-                                                while($dados = mysqli_fetch_array($resultado)):
-                                            ?>
+                                            while($dados = mysqli_fetch_array($resultado)):
+                                        ?>
                                         <option value="<?php echo $dados['ID_DIREITO']; ?>">
                                             <?php echo $dados['NOME_DIREITO']; ?>
                                         </option>
                                         <?php
-                                                endwhile;
-                                            ?>
+                                            endwhile;
+                                        ?>
                                     </select>
 
                                 </div>
@@ -171,35 +171,35 @@ include("conexao.php");
 
                     <br />
 
-                    <!-- Nome Completo -->
+                    <!-- Prioridade Atendimento -->
                     <div class="row">
                         <div class="form-group">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
                                 <label for="Prioridade">Prioridade do Atendimento <h11>*</h11> :</label>
 
                                 <label required="" class="radio-inline" for="radios-0">
-                                    <input name="prioridade" id="prioridade" value="Alta" type="radio" required>
+                                    <input name="PRIORIDADE_ATENDIMENTO" id="prioridade" value="Alta" type="radio" required>
                                     Alta
                                 </label>
                                 <label class="radio-inline" for="radios-1">
-                                    <input name="prioridade" id="prioridade" value="Média" type="radio">
+                                    <input name="PRIORIDADE_ATENDIMENTO" id="prioridade" value="Média" type="radio">
                                     Média
                                 </label>
                                 <label class="radio-inline" for="radios-2">
-                                    <input name="prioridade" id="prioridade" value="Baixa" type="radio">
+                                    <input name="PRIORIDADE_ATENDIMENTO" id="prioridade" value="Baixa" type="radio">
                                     Baixa
                                 </label>
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
 
-                            <!-- Horário do Estagiário -->
+                            <!-- Estagiário do Atendimento -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                 <label for=" Horario de Estagiário">Estagiário do Atendimento<h11>*</h11></label>
                                 <?php
                                     $sql = "SELECT * FROM funcionario";
                                     $resultado = mysqli_query($conexao, $sql);
                                 ?>
-                                <select required id="funcionario" name="mat_func" class="form-control">
+                                <select required id="funcionario" name="MAT_FUNC" class="form-control">
                                     <option value="">Selecione o Estagiário</option>
                                     <?php
                                         while($dados = mysqli_fetch_array($resultado)):
@@ -215,7 +215,7 @@ include("conexao.php");
                         </div>
                     </div>
 
-                    <!--  -->
+                    <!-- Comentário do Atendimento -->
                     <div class="row">
                         <div class="form-group">
 
@@ -223,7 +223,7 @@ include("conexao.php");
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
                                 <label for="comentario_atendimento">Comentário do Atendimento <h11>*</h11>
                                 </label>
-                                <textarea name="comentario_atendimento" type="text" class="form-control noresize"
+                                <textarea name="COMENTARIO_ATENDIMENTO" type="text" class="form-control noresize"
                                     required="true" id="comentario_atendimento" placeholder="Comentário do Atendimento"
                                     rows="5"></textarea>
                             </div>

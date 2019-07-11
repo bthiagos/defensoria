@@ -24,7 +24,7 @@ include("conexao.php");
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
+<nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -124,7 +124,7 @@ include("conexao.php");
                                     $sql = "SELECT * FROM atendimento 
                                     INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
                                     INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
-                                    INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIR";
+                                    INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIREITO";
                                     $resultado = mysqli_query($conexao, $sql);
                                     while($dados = mysqli_fetch_array($resultado)):  
                                     ?>
@@ -133,7 +133,7 @@ include("conexao.php");
                                         <!--<td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
                                         <td><?php echo $dados['RG_ASS']; ?></td>
                                         <td><?php echo $dados['MAT_FUNC']; ?></td>
-                                        <td><?php echo $dados['ID_DIR']; ?></td>
+                                        <td><?php echo $dados['ID_DIREITO']; ?></td>
                                         <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>-->
                                         
                                         <td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
