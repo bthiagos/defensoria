@@ -108,45 +108,42 @@ include("conexao.php");
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-sm-8">
-                                <table class="table table-striped border border-primary">
-                                    <tbody>
-                                        <tr>
-                                            <td class="col-sm-3">Matrícula: </td>
-                                            <td class="col-sm-6"><?php echo $dados['MAT_FUNC']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nome: </td>
-                                            <td><?php echo $dados['NOME_FUNC']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>RG: </td>
-                                            <td><?php echo $dados['RG_FUNC']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>CPF: </td>
-                                            <td><?php echo $dados['CPF_FUNC']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>E-mail: </td>
-                                            <td><?php echo $dados['EMAIL_FUNC']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tipo do Estágio: </td>
-                                            <td><?php echo $dados['CARGO_FUNC']; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Instituição de Ensino: </td>
-                                            <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
-                                        </tr>
+                            <table class="table table-striped border border-primary">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-3">Matrícula: </td>
+                                        <td class="col-sm-8"><?php echo $dados['MAT_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nome: </td>
+                                        <td><?php echo $dados['NOME_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>RG: </td>
+                                        <td><?php echo $dados['RG_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CPF: </td>
+                                        <td><?php echo $dados['CPF_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-mail: </td>
+                                        <td><?php echo $dados['EMAIL_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tipo do Estágio: </td>
+                                        <td><?php echo $dados['CARGO_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Instituição de Ensino: </td>
+                                        <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
+                                    </tr>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-sm-4">
-                                
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
+
+
                     </div>
                 </div>
             </div>
