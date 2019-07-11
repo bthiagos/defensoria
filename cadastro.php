@@ -149,8 +149,7 @@ include("conexao.php");
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                         <label for="CPF">CPF <h11>*</h11></label>
                                         <input name="cpf_func" type="text" class="form-control" required="true"
-                                            id="cpf_func" placeholder="Digite seu CPF" min="00000000000"
-                                            max="99999999999" maxlength="11" pattern="[0-9]+$">
+                                            id="cpf_func" placeholder="Digite seu CPF" maxlength="11" pattern="[0-9]+$">
                                     </div>
                                     <!-- Tipo do Estagiário -->
                                     <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
@@ -215,31 +214,13 @@ include("conexao.php");
                                     <!-- Tipo do Estagiário -->
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                         <label for="Tipo de Estagiário">Tipo do Estagiário <h11>*</h11></label>
-                                        <select name="ID_TIPO_FUNC" class="form-control">
+                                        <select name="id_tipo_func" class="form-control">
                                             <option value="">Selecione o tipo do Estagiário</option>
                                             <option value="1">Administrador</option>
                                             <option value="2">Estagiário Contratado</option>
                                             <option value="3">Estagiário Voluntário</option>
-                                            
+
                                         </select>
-                                        <!-- <?php
-                                            $sql = "SELECT * FROM tipo_funcionario";
-                                            $resultado = mysqli_query($conexao, $sql);
-                                        ?>
-
-                                        <select name="ID_TIPO_FUNC" class="form-control">
-                                            <option value="">Selecione o tipo do Estagiário</option>
-                                            <?php
-                                                while($dados = mysqli_fetch_array($resultado)):
-                                            ?>
-                                            <option value="<?php echo $dados['ID_TIPO_FUNC']; ?>">
-                                                <?php echo $dados['CARGO_FUNC']; ?>
-                                            </option>
-                                            <?php
-                                                endwhile;
-                                            ?>
-                                        </select>-->
-
                                     </div>
 
                                 </div>

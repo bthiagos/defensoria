@@ -30,7 +30,7 @@ $sql = "INSERT INTO funcionario (mat_func, cpf_func, nome_func, rg_func, enderec
 								email_func, hora_expediente_func, senha_func, 		
 								data_cadastro_func) 
 								VALUES('$mat_func', '$cpf_func', '$nome_func','$rg_func',
-								'$endereco_func','$id_tipo_func','$instituicao_func',
+								'$endereco_func',$id_tipo_func,'$instituicao_func',
 								'$matricula_inst_func','$email_func','$hora_expediente_func',
 								'$senha_func', NOW())";
 
