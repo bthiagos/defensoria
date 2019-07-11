@@ -44,7 +44,7 @@ session_start();
 
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
+                            src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
                             alt="Avatar"> Entrar <b class="caret"></b></a>
                 </li>
             </ul>
