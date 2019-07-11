@@ -24,7 +24,7 @@ include("conexao.php");
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -99,54 +99,57 @@ include("conexao.php");
                 </div>
                 <div class="panel-body">
                     <?php
-                    $sql = "SELECT * FROM usuario";
+                    $sql = "SELECT * FROM funcionario
+                            INNER JOIN tipo_funcionario
+                            ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC";
                     $resultado = mysqli_query($conexao, $sql);
                     $dados =  mysqli_fetch_array($resultado); 
                     ?>
-                        
+
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td class="col-sm-2">Matrícula: </td>
-                                        <td class="col-sm-8"><?php echo $dados['matricula']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nome: </td>
-                                        <td><?php echo $dados['nome']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>E-mail: </td>
-                                        <td><?php echo $dados['email']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tipo do Estágio: </td>
-                                        <td><?php echo $dados['idtipoestagiario']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Instituição de Ensino: </td>
-                                        <td><?php echo $dados['instituicaoensino']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total de Horas: </td>
-                                        <td><?php echo $dados['hora_estagiario']; ?></td>
-                                    </tr>
-                                        <td>Atendimentos:</td>
-                                        <td><?php echo $dados['idatendimento']; ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-sm-10">
+                            <div class="col-sm-8">
+                                <table class="table table-striped border border-primary">
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-sm-3">Matrícula: </td>
+                                            <td class="col-sm-6"><?php echo $dados['MAT_FUNC']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nome: </td>
+                                            <td><?php echo $dados['NOME_FUNC']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>RG: </td>
+                                            <td><?php echo $dados['RG_FUNC']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>CPF: </td>
+                                            <td><?php echo $dados['CPF_FUNC']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>E-mail: </td>
+                                            <td><?php echo $dados['EMAIL_FUNC']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tipo do Estágio: </td>
+                                            <td><?php echo $dados['CARGO_FUNC']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Instituição de Ensino: </td>
+                                            <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
+                                        </tr>
 
-                                </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-4">
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
     </section>
