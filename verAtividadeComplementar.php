@@ -102,10 +102,12 @@ include("conexao.php");
                     //SELECT
                     if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
-                        $sql = "SELECT * FROM funcionario";
+                        $sql = "SELECT * FROM funcionario 
+                        INNER JOIN atendimento ON atendimento.MAT_FUNC = funcionario.MAT_FUNC
+                        ";
                         //INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
                         //INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
-                        //INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIR
+                        //INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIREITO
                         //WHERE ID_ATENDIMENTO = '$id'";
                         $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
