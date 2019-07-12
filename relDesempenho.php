@@ -42,12 +42,21 @@ include("conexao.php");
                     <a href="painel.php" class="nav-link">Atendimento</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
+                        <li>
+                            <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
                         <li>
                             <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
                         </li>
@@ -60,19 +69,12 @@ include("conexao.php");
             </ul>
 
             <ul class="nav navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link notifications"><i class="fa fa-bell-o"></i><span
-                            class="badge">1</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link messages"><i class="fa fa-envelope-o"></i><span
-                            class="badge">10</span></a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                        <img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
                             alt="Avatar" />
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
