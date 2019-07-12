@@ -19,6 +19,7 @@ $row = mysqli_num_rows($result);
 if($row == 1) {
 	$matricula_bd = mysqli_fetch_assoc($result);
 	$_SESSION['nome_func'] = $matricula_bd['nome_func'];
+	$_SESSION['mat_func'] = $matricula_bd['mat_func'];
 	header('Location: painel.php');
 	exit();
 } else {

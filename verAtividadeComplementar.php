@@ -149,7 +149,20 @@ include("conexao.php");
                                     </tr>
                                     </tr>
                                         <td>Atendimentos</td>
-                                        <td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
+                                        <td>
+                                            <!--<?php echo $dados['ID_ATENDIMENTO']; ?>-->
+                                            <?php
+                                            //SELECT
+                                            if(isset($_GET['id'])):
+                                                $id = mysqli_escape_string($conexao, $_GET['id']);
+                                                $sql = "SELECT count(*) as total from atendimento where MAT_FUNC = '$id'";
+                                                $resultado = mysqli_query($conexao, $sql);
+                                                $dados1 =  mysqli_fetch_array($resultado);
+                                            endif;   
+                                             
+                                            ?>
+                                            <?php echo $dados1['total']; ?>
+                                        </td>
                                     </tr>
 
                                 </tbody>
