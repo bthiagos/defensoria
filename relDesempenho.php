@@ -49,7 +49,7 @@ include("conexao.php");
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
                         <li>
-                            <a href="relDesempenho" class="dropdown-item">Relatório de Desempenho</a>
+                            <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
                         </li>
                         <li>
                             <a href="relAtividadeComplementar.php" class="dropdown-item">Relatório de Atividade
