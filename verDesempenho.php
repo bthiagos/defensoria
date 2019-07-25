@@ -2,6 +2,7 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
+include('./fpdf/fpdf.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -164,18 +165,22 @@ include("conexao.php");
                                             ?>
                                         <?php echo $dados1['total']; ?>
                                     </td>
-                                    </tr>
-
+                                    </tr>  
                                 </tbody>
                             </table>
+                                 
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
 
+                                </div>
+                                <div class="col-sm-2">
+                                <a href="gerarpdf.php?id=<?php echo $dados['MAT_FUNC']; ?>" class="btn btn-info btn-block">
+                                        <i class='fa fa-file-pdf-o'></i>&nbsp Gerar PDF</a> 
                                 </div>
                                 <div class="col-sm-2">
                                     <a href="relDesempenho.php" class="btn btn-danger btn-block">
                                         <i class='fa fa-arrow-left'></i>
-                                        Voltar</a>
+                                        &nbsp Voltar</a>
                                 </div>
                             </div>
                         </div>
