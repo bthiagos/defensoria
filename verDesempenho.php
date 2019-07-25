@@ -24,7 +24,7 @@ include("conexao.php");
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -72,8 +72,9 @@ include("conexao.php");
 
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
-                        <img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
-                            alt="Avatar" />
+                        <!--<img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
+                            alt="Avatar" />-->
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                         <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -95,60 +96,90 @@ include("conexao.php");
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Relatórios de Desempenho
+                    Relatório de Desempenho
                 </div>
                 <div class="panel-body">
+                    <?php
+                    //SELECT
+                    if(isset($_GET['id'])):
+                        $id = mysqli_escape_string($conexao, $_GET['id']);
+                       // $sql = "SELECT * FROM funcionario 
+                        //INNER JOIN atendimento ON atendimento.MAT_FUNC = funcionario.MAT_FUNC
+                        //";
+                      
+                        $sql = "SELECT * FROM atendimento 
+                        INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
+                        INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
+                        INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIREITO
+                        INNER JOIN tipo_funcionario ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC
+                        WHERE funcionario.MAT_FUNC = '$id'";
+                         
+                        $resultado = mysqli_query($conexao, $sql);
+                        $dados =  mysqli_fetch_array($resultado);
+                    endif;    
+                     ?>
+
                     <div class="row">
-                        <div class="col-sm-9">
-                            <h4>Lista de Estagiários</h4>
-                        </div>
-                        <div class="col-sm-3">
-                            <!-- <a href="novoAtendimento.php" class="btn btn-primary btn-block">Adicionar Atendimento</a>-->
-                        </div>
-                    </div><br />
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <table class="table table-striped">
-
-                                <thead>
-                                    <tr>
-                                        <th>Matrícula</th>
-                                        <th>Nome</th>
-                                        <th>E-mail</th>
-                                        <th>Instituição de Ensino</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
                                 <tbody>
-                                <?php
-
-                                    $sql = "SELECT * FROM funcionario"; 
-                                    $resultado = mysqli_query($conexao, $sql);
-                                    while($dados = mysqli_fetch_array($resultado)):  
-                                    ?>
                                     <tr>
-                                        <td><?php echo $dados['MAT_FUNC']; ?></td>
-                                        <td><?php echo $dados['NOME_FUNC']; ?></td>
-                                        <td><?php echo $dados['EMAIL_FUNC']; ?></td>
-                                        <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
-
-                                        <td>
-                                            <a href="verDesempenho.php?id=<?php echo $dados['MAT_FUNC']; ?>"
-                                                class="btn btn-success btn-custom">
-                                                <i class="material-icons">visibility</i>
-                                            </a>
-
-                                        </td>
-
+                                        <td class="col-sm-2">Matrícula: </td>
+                                        <td class="col-sm-8"><?php echo $dados['MAT_FUNC']; ?></td>
                                     </tr>
-                                    <?php endwhile; ?>
+                                    <tr>
+                                        <td>Nome: </td>
+                                        <td><?php echo $dados['NOME_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-mail: </td>
+                                        <td><?php echo $dados['EMAIL_FUNC']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tipo de Estagiário: </td>
+                                        <td><?php echo $dados['CARGO_FUNC']; ?></td>
+                                    </tr>
+                                    <td>Expediente: </td>
+                                    <td><?php echo $dados['HORA_EXPEDIENTE_FUNC']; ?></td>
+                                    </tr>
+                                    </tr>
+                                    <td>Instituição de Ensino </td>
+                                    <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
+                                    </tr>
+                                    </tr>
+                                    <td>Atendimentos</td>
+                                    <td>
+                                        <!--<?php echo $dados['ID_ATENDIMENTO']; ?>-->
+                                        <?php
+                                            //SELECT
+                                            if(isset($_GET['id'])):
+                                                $id = mysqli_escape_string($conexao, $_GET['id']);
+                                                $sql = "SELECT count(*) as total from atendimento where MAT_FUNC = '$id'";
+                                                $resultado = mysqli_query($conexao, $sql);
+                                                $dados1 =  mysqli_fetch_array($resultado);
+                                            endif;   
+                                             
+                                            ?>
+                                        <?php echo $dados1['total']; ?>
+                                    </td>
+                                    </tr>
 
                                 </tbody>
                             </table>
+                            <div class="row">
+                                <div class="col-sm-10">
 
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="relDesempenho.php" class="btn btn-danger btn-block">
+                                        <i class='fa fa-arrow-left'></i>
+                                        Voltar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br /><br />
                 </div>
             </div>
         </div>
