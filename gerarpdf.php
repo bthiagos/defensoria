@@ -27,13 +27,14 @@ endif;
 
 $pdf = new FPDF();
 $pdf->AddPage();
-$pdf->SetFont('Arial','B',16);
+$pdf->Ln(5);
+$pdf->SetFont('Arial','B',18);
 $pdf->Cell(190,10,utf8_decode('Relatório de Desempenho'),0,0,"C");
-$pdf->Image('./img/logo-defensoria.png',10,10,-200);
-$pdf->Ln(15);
+$pdf->Image('./img/logo-defensoria.png',10,15,-180);
+$pdf->Ln(21);
 
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(190, 8,utf8_decode("Dados de Desempenho do Estagiário"),1,0,'L');
+$pdf->Cell(190, 10,utf8_decode("Dados de Desempenho do Estagiário"),1,0,'L');
 $pdf->Ln();
 
 $pdf->SetFont('Arial','',10);
@@ -76,18 +77,7 @@ $pdf->Ln();
    // $pdf->Cell(50,7,utf8_decode($dados1['total']),1,0,'C');
     $pdf->Ln();
 //}
-class PDF extends FPDF
-{
-function Footer()
-{
-    // Go to 1.5 cm from bottom
-    $this->SetY(-15);
-    // Select Arial italic 8
-    $this->SetFont('Arial','I',8);
-    // Print centered page number
-    $this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
-}
-}
+
 ob_clean ();
 $pdf->Output();
 
