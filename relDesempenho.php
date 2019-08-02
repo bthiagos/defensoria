@@ -2,6 +2,7 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,7 +25,7 @@ include("conexao.php");
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -51,6 +52,12 @@ include("conexao.php");
                         <li>
                             <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
+                        <li>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -72,8 +79,7 @@ include("conexao.php");
 
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
-                        <img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
-                            alt="Avatar" />
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
                         <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -120,7 +126,7 @@ include("conexao.php");
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php
+                                    <?php
 
                                     $sql = "SELECT * FROM funcionario"; 
                                     $resultado = mysqli_query($conexao, $sql);

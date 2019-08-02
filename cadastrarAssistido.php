@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 
 $rg_ass = mysqli_real_escape_string($conexao, trim($_POST['rg_ass']));
 $nome_ass = mysqli_real_escape_string($conexao, trim($_POST['nome_ass']));

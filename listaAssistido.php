@@ -5,7 +5,7 @@ include("conexao.php");
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -40,40 +40,47 @@ header('Content-Type: text/html; charset=utf-8');
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
-                    <a href="painel.php" class="nav-link">Inicio</a>
+                    <a href="painel.php" class="nav-link">Atendimento</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Desempenho</a>
+                            <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Atividade Complementar</a>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
+                        </li>
+                        <li>
+                            <a href="relAtividadeComplementar.php" class="dropdown-item">Relatório de Atividade
+                                Complementar</a>
                         </li>
                     </ul>
                 </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link notifications"><i class="fa fa-bell-o"></i><span
-                            class="badge">1</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link messages"><i class="fa fa-envelope-o"></i><span
-                            class="badge">10</span></a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
-                            alt="Avatar" />
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -94,16 +101,59 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Visualizar Atendimento
+                    Assistidos
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-9"></div>
+                        <div class="col-sm-9">
+                            <h4>Lista de Estagiários</h4>
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped">
 
-                        <br /><br />
+                                <thead>
+                                    <tr>
+                                        <th>RG</th>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+
+                                    $sql = "SELECT * FROM assistido"; 
+                                    $resultado = mysqli_query($conexao, $sql);
+                                    while($dados = mysqli_fetch_array($resultado)):  
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $dados['RG_ASS']; ?></td>
+                                        <td><?php echo $dados['NOME_ASS']; ?></td>
+                                        <td><?php echo $dados['EMAIL_ASS']; ?></td>
+                                        <!--<td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>-->
+
+                                        <td>
+                                            <a href="verAssistido.php?id=<?php echo $dados['RG_ASS']; ?>"
+                                                class="btn btn-success btn-custom">
+                                                <i class="material-icons">visibility</i>
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                    <?php endwhile; ?>
+
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
+                    <br /><br />
                 </div>
             </div>
+        </div>
         </div>
 
     </section>

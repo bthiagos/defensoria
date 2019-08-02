@@ -2,6 +2,7 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,7 +25,7 @@ include("conexao.php");
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-expand-xl navbar-light">
+    <nav class="navbar navbar-default navbar-expand-xl navbar-light">
         <div class="navbar-header d-flex col">
             <a class="navbar-brand" href="painel.php"><i class="fa fa-cube"></i>Portal<b>Defensoria</b></a>
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse"
@@ -51,6 +52,12 @@ include("conexao.php");
                         <li>
                             <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
+                        <li>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -72,8 +79,7 @@ include("conexao.php");
 
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
-                        <img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
-                            alt="Avatar" />
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
                         <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -98,7 +104,7 @@ include("conexao.php");
                     Atividade Complementar
                 </div>
                 <div class="panel-body">
-                <?php
+                    <?php
                     //SELECT
                     if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
@@ -125,46 +131,40 @@ include("conexao.php");
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <td class="col-sm-2">Matrícula: </td>
+                                        <td class="col-sm-2"><b>Matrícula: </b></td>
                                         <td class="col-sm-8"><?php echo $dados['MAT_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Nome: </td>
+                                        <td><b>Nome: </b></td>
                                         <td><?php echo $dados['NOME_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>E-mail: </td>
+                                        <td><b>E-mail: </b></td>
                                         <td><?php echo $dados['EMAIL_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Tipo de Estagiário: </td>
+                                        <td><b>Tipo de Estagiário: </b></td>
                                         <td><?php echo $dados['CARGO_FUNC']; ?></td>
                                     </tr>
-                                        <td>Expediente: </td>
-                                        <td><?php echo $dados['HORA_EXPEDIENTE_FUNC']; ?></td>
+                                    <td><b>Expediente: </b></td>
+                                    <td><?php echo $dados['HORA_EXPEDIENTE_FUNC']; ?></td>
                                     </tr>
-                                    </tr>
-                                        <td>Instituição de Ensino </td>
+                                    <tr>
+                                        <td><b>Instituição de Ensino </b></td>
                                         <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
                                     </tr>
+                                    <tr>
+                                        <td><b>Matrícula da Instituição de Ensino </b></td>
+                                        <td><?php echo $dados['MATRICULA_INST_FUNC']; ?></td>
                                     </tr>
-                                        <td>Atendimentos</td>
-                                        <td>
-                                            <!--<?php echo $dados['ID_ATENDIMENTO']; ?>-->
-                                            <?php
-                                            //SELECT
-                                            if(isset($_GET['id'])):
-                                                $id = mysqli_escape_string($conexao, $_GET['id']);
-                                                $sql = "SELECT count(*) as total from atendimento where MAT_FUNC = '$id'";
-                                                $resultado = mysqli_query($conexao, $sql);
-                                                $dados1 =  mysqli_fetch_array($resultado);
-                                            endif;   
-                                             
-                                            ?>
-                                            <?php echo $dados1['total']; ?>
-                                        </td>
+                                    <tr>
+                                        <td><b>Carga Horária</b></td>
+                                        <td><?php echo $dados['CARGA_HORARIA_FUNC']; ?></td>
                                     </tr>
-
+                                    <tr>
+                                        <td><b>Tipo de Atividade</b></td>
+                                        <td><?php echo "Acompanhamento dos assistidos oriundos da triagem."; ?></td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <div class="row">

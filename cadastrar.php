@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 
 $mat_func = mysqli_real_escape_string($conexao, trim($_POST['mat_func']));
 $nome_func = mysqli_real_escape_string($conexao, trim($_POST['nome_func']));

@@ -213,7 +213,54 @@
     .table tbody > tr:nth-child(odd) > th {
       background-color: #f8f8f8;
     }
+
+    table {
+      max-width: 100%;
+      background-color: transparent;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-family: arial;
+    }
   
+    .table {
+      border-bottom: #999999 solid 1px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .table th,
+    .table td {
+      border-right: #999999 solid 1px;
+      font-size: 12px;
+      padding: 8px;
+      line-height: 20px;
+      text-align: left;
+      vertical-align: middle;
+    }
+  
+    .table td:last-child {
+       border-right: 0;
+    }
+  
+    .table thead th {
+      font-weight: normal;
+      background-color: #005dab;
+      color: #fff;
+      font-size: 15px;
+    }
+    .table2 thead th {
+      font-weight: normal;
+      background-color: #dff0d8;;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    
+  
+    .table tbody > tr:nth-child(odd) > td,
+    .table tbody > tr:nth-child(odd) > th {
+      background-color: #f8f8f8;
+    }
   
   /* Small Sizes */
   @media (max-width: 767px) { 

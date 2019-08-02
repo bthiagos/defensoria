@@ -101,99 +101,111 @@ header('Content-Type: text/html; charset=utf-8');
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Atendimentos
+                    Funcionário
                 </div>
                 <div class="panel-body">
+                    <?php
+                    //SELECT
+                    if(isset($_GET['id'])):
+                        $id = mysqli_escape_string($conexao, $_GET['id']);
+                        $sql = "SELECT * FROM assistido  
+                        INNER JOIN tipo_funcionario 
+                        WHERE assistido.RG_ASS = '$id'"; 
+                                               
+                        $resultado = mysqli_query($conexao, $sql);
+                        $dados =  mysqli_fetch_array($resultado);
+                    endif;    
+                     ?>
+
                     <div class="row">
-                        <div class="col-sm-9"></div>
-                        <div class="col-sm-3">
-                            <a href="novoAtendimento.php" class="btn btn-success btn-block"><i class="fa fa-plus "
-                                    aria-hidden="true">&nbsp &nbsp</i>Adicionar Atendimento</a>
-                        </div>
-                    </div><br />
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-striped">
 
-                                <thead>
-                                    <tr>
-                                        <th>Nº Atendimento</th>
-                                        <th>Assistido</th>
-                                        <th>Estagiário</th>
-                                        <th>Área do Direito</th>
-                                        <th>Prioridade</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    //$sql = "SELECT * FROM atendimento";
-                                    $sql = "SELECT * FROM atendimento 
-                                    INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
-                                    INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
-                                    INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIREITO";
-                                    $resultado = mysqli_query($conexao, $sql);
-                                    while($dados = mysqli_fetch_array($resultado)):  
-                                    ?>
-
-                                    <tr>
-                                        <!--<td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
-                                        <td><?php echo $dados['RG_ASS']; ?></td>
-                                        <td><?php echo $dados['MAT_FUNC']; ?></td>
-                                        <td><?php echo $dados['ID_DIREITO']; ?></td>
-                                        <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>-->
-
-                                        <td><?php echo $dados['ID_ATENDIMENTO']; ?></td>
-                                        <td><?php echo $dados['NOME_ASS']; ?></td>
-                                        <td><?php echo $dados['NOME_FUNC']; ?></td>
-                                        <td><?php echo $dados['NOME_DIREITO']; ?></td>
-                                        <td><?php echo $dados['PRIORIDADE_ATENDIMENTO']; ?></td>
-                                        <td>
-                                            <a href="verAtendimento.php?id=<?php echo $dados['ID_ATENDIMENTO']; ?>"
-                                                class="btn btn-success btn-custom">
-                                                <i class="material-icons">visibility</i>
-                                            </a>
-                                            <!-- <a href="#myModal<?php echo $dados['idatendimento']; ?>"
-                                                class="btn btn-danger btn-custom"
-                                                data-toggle="modal" data-target="#myModal">
-                                                <i class="material-icons">delete</i></a>-->
-                                        </td>
-                                        <!-- Modal -->
-                                        <div id="myModal<?php echo $dados['idatendimento']; ?>" class="modal fade"
-                                            role="dialog">
-                                            <div class="modal-dialog">
-
-                                                <!-- Modal content-->
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close"
-                                                            data-dismiss="modal">&times;</button>
-                                                        <h4 class="modal-title">Modal Header</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Some text in the modal.</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"
-                                                            data-dismiss="modal">Fechar</button>
-                                                    </div>
-                                                </div>
-
+                            <div class="box" style="padding-left: 10px;">
+                                <form>
+                                    <!--          NOVO FORM           -->
+                                    <br />
+                                    <!-- Nome e Sexo-->
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 control">
+                                                <label class="control-label" for="nome_ass">Nome Completo <h11>*</h11>
+                                                </label>
+                                                <input id="nome_ass" placeholder="<?php echo $dados['NOME_ASS']; ?>"
+                                                    class="form-control input-md" required="" type="text" disabled>
+                                            </div>
+                                            <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
+                                            <div class="col-md-4">
+                                                <input id="sexo_ass" placeholder="<?php echo $dados['SEXO_ASS']; ?>"
+                                                    class="form-control input-md" required="" type="text" disabled>
                                             </div>
                                         </div>
-                                    </tr>
-                                    <?php endwhile; ?>
+                                    </div>
+                                    <br />
 
-                                </tbody>
-                            </table>
+                                    <!-- RG e Estado Civil-->
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                                <label class="control-label" for="rg_ass">RG <h11>*</h11>
+                                                </label>
+                                                <input id="rg_ass" placeholder="<?php echo $dados['RG_ASS']; ?>"
+                                                    class="form-control input-md" required="" type="text" maxlength="9"
+                                                    pattern="[0-9]+$" disabled>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control"></div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                                <label class="control-label" for="Estado Civil">Telefone <h11>*</h11>
+                                                </label>
+                                                <input type="text" class="form-control" id="telefone_ass"
+                                                    placeholder="<?php echo $dados['TELEFONE_ASS']; ?>"
+                                                    pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$" disabled>
+                                                <div class="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <br />
+                                    <!-- E-mail e Estad-->
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 control">
+                                                <label class="control-label" for="email_ass">Email <h11>*</h11>
+                                                </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i
+                                                            class="glyphicon glyphicon-envelope"></i></span>
+                                                    <input id="email_ass" name="email_ass" class="form-control"
+                                                        placeholder="<?php echo $dados['EMAIL_ASS']; ?>" disabled
+                                                        type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+
+                            </div>
                         </div>
                     </div>
+
+                    </form>
                     <br /><br />
+
+                    <div class="row">
+                        <div class="col-sm-10">
+
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="listaAssistido.php" class="btn btn-danger btn-block">
+                                <i class='fa fa-arrow-left'></i>
+                                Voltar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
+
 
     </section>
 

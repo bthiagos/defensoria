@@ -2,7 +2,7 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
-include('./fpdf/fpdf.php');
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -52,6 +52,12 @@ include('./fpdf/fpdf.php');
                         <li>
                             <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
+                        <li>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -73,9 +79,7 @@ include('./fpdf/fpdf.php');
 
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
-                        <!--<img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
-                            alt="Avatar" />-->
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
                         <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -127,33 +131,37 @@ include('./fpdf/fpdf.php');
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <td class="col-sm-2">Matrícula: </td>
-                                        <td class="col-sm-8"><?php echo $dados['MAT_FUNC']; ?></td>
+                                        <td class="col-sm-3"><b>Matrícula: </b></td>
+                                        <td class=""><?php echo $dados['MAT_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Nome: </td>
+                                        <td><b>Nome: </b></td>
                                         <td><?php echo $dados['NOME_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>E-mail: </td>
+                                        <td><b>E-mail: </b></td>
                                         <td><?php echo $dados['EMAIL_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Tipo de Estagiário: </td>
+                                        <td><b>Tipo de Estagiário: </b></td>
                                         <td><?php echo $dados['CARGO_FUNC']; ?></td>
                                     </tr>
-                                    <td>Expediente: </td>
+                                    <td><b>Expediente: </b></td>
                                     <td><?php echo $dados['HORA_EXPEDIENTE_FUNC']; ?></td>
                                     </tr>
+                                    <tr>
+                                        <td><b>Instituição de Ensino: </b></td>
+                                        <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
                                     </tr>
-                                    <td>Instituição de Ensino </td>
-                                    <td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>
+                                    <tr>
+                                        <td><b>Matrícula da Instituição de Ensino: </b></td>
+                                        <td><?php echo $dados['MATRICULA_INST_FUNC']; ?></td>
                                     </tr>
-                                    </tr>
-                                    <td>Atendimentos</td>
-                                    <td>
-                                        <!--<?php echo $dados['ID_ATENDIMENTO']; ?>-->
-                                        <?php
+                                    <tr>
+                                        <td><b>Total de Atendimentos: </b></td>
+                                        <td>
+                                            <!--<?php echo $dados['ID_ATENDIMENTO']; ?>-->
+                                            <?php
                                             //SELECT
                                             if(isset($_GET['id'])):
                                                 $id = mysqli_escape_string($conexao, $_GET['id']);
@@ -163,19 +171,51 @@ include('./fpdf/fpdf.php');
                                             endif;   
                                              
                                             ?>
-                                        <?php echo $dados1['total']; ?>
-                                    </td>
-                                    </tr>  
+                                            <?php echo $dados1['total']; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Atendidos:</b></td>
+                                        <td><select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                                <?php
+                                            if(isset($_GET['id'])):
+                                            $id = mysqli_escape_string($conexao, $_GET['id']);
+                                            $sqlx = "SELECT * FROM atendimento
+                                            INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
+                                            INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
+                                            INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO =
+                                            atendimento.ID_DIREITO
+                                            INNER JOIN tipo_funcionario ON tipo_funcionario.ID_TIPO_FUNC =
+                                            funcionario.ID_TIPO_FUNC
+                                            WHERE funcionario.MAT_FUNC = '$id'";
+                                            $resultadox = mysqli_query($conexao, $sqlx);
+                                            //$dados = mysqli_fetch_array($resultado);
+                                            while($dadosx = mysqli_fetch_array($resultadox)):  
+                                                ?>
+                                                <option selected>
+                                                    <?php echo "Nº Atendimento: {$dadosx['ID_ATENDIMENTO']} | Nome: {$dadosx['NOME_ASS']} "; ?>
+                                                </option>
+                                                <?php 
+                                            endwhile;
+                                            endif;
+                                            ?>
+                                            </select>
+                                        </td>
+
+
+
+                                    </tr>
                                 </tbody>
                             </table>
-                                 
+
                             <div class="row">
                                 <div class="col-sm-8">
 
                                 </div>
                                 <div class="col-sm-2">
-                                <a href="gerarpdf.php?id=<?php echo $dados['MAT_FUNC']; ?>" class="btn btn-info btn-block">
-                                        <i class='fa fa-file-pdf-o'></i>&nbsp Gerar PDF</a> 
+                                    <a href="gerarpdf.php?id=<?php echo $dados['MAT_FUNC']; ?>"
+                                        class="btn btn-info btn-block" target="_blank">
+                                        <i class='fa fa-file-pdf-o'></i>&nbsp Gerar PDF</a>
                                 </div>
                                 <div class="col-sm-2">
                                     <a href="relDesempenho.php" class="btn btn-danger btn-block">

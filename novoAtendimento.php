@@ -2,6 +2,7 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -51,6 +52,12 @@ include("conexao.php");
                         <li>
                             <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
+                        <li>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -72,8 +79,7 @@ include("conexao.php");
 
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
-                        <img src="https://img.icons8.com/ios-glyphs/64/000000/person-male.png" class="avatar"
-                            alt="Avatar" />
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
                         <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
@@ -111,7 +117,7 @@ include("conexao.php");
                     endif;
                     unset($_SESSION['status_atendimento']);
                     ?>
-                 
+
                     <div class="box">
                         <form action="cadastrar_atendimento.php" method="POST">
                             <div class="row">
@@ -178,7 +184,8 @@ include("conexao.php");
                                 <label for="Prioridade">Prioridade do Atendimento <h11>*</h11> :</label>
 
                                 <label required="" class="radio-inline" for="radios-0">
-                                    <input name="PRIORIDADE_ATENDIMENTO" id="prioridade" value="Alta" type="radio" required>
+                                    <input name="PRIORIDADE_ATENDIMENTO" id="prioridade" value="Alta" type="radio"
+                                        required>
                                     Alta
                                 </label>
                                 <label class="radio-inline" for="radios-1">
@@ -202,13 +209,14 @@ include("conexao.php");
                                 <select required id="funcionario" name="MAT_FUNC" class="form-control">
                                     <option value="">Selecione o Estagiário</option>
                                     <?php
-                                        while($dados = mysqli_fetch_array($resultado)):
+                                        //while($dados = mysqli_fetch_array($resultado)):
+                                            $dados = mysqli_fetch_array($resultado);
                                     ?>
-                                    <option value="<?php echo $dados['MAT_FUNC']; ?>">
-                                        <?php echo $dados['NOME_FUNC']; ?>
+                                    <option value="<?php echo $bd_matricula['mat_func']; ?>">
+                                        <?php echo $_SESSION['nome_func']; ?>
                                     </option>
                                     <?php
-                                        endwhile;
+                                        //endwhile;
                                     ?>
                                 </select>
                             </div>

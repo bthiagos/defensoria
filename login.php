@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('conexao.php');
+header('Content-Type: text/html; charset=utf-8');
 
 if(empty($_POST['mat_func']) || empty($_POST['senha_func'])) {
 	header('Location: index.php');
