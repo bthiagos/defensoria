@@ -23,8 +23,12 @@ $row = mysqli_num_rows($result);
 $matricula_bd = mysqli_fetch_assoc($result);
 
 if(($row == 1) && ($id_tipo_func == 1)){
-	
-	//$tipo_bd = mysqli_fetch_assoc($res);
+	$_SESSION['nome_func'] = $matricula_bd['nome_func'];
+	$_SESSION['mat_func'] = $matricula_bd['mat_func'];
+	$_SESSION['id_tipo_func'] = $matricula_bd['id_tipo_func'];
+	header('Location: admin/painel.php');
+	exit();
+} else if(($row == 1) && ($id_tipo_func == 2 || $id_tipo_func == 3)){
 	$_SESSION['nome_func'] = $matricula_bd['nome_func'];
 	$_SESSION['mat_func'] = $matricula_bd['mat_func'];
 	$_SESSION['id_tipo_func'] = $matricula_bd['id_tipo_func'];

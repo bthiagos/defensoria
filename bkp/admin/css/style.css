@@ -1,0 +1,326 @@
+.login-form {
+      width: 340px;
+      margin: 50px auto;
+    }
+
+    .login-form form {
+      margin-bottom: 15px;
+      background: #f7f7f7;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+    }
+
+    .login-form h2 {
+      margin: 0 0 15px;
+    }
+
+    .form-control,
+    .btn {
+      min-height: 38px;
+      border-radius: 2px;
+    }
+
+    .btn {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+   
+    body {
+      background: #eeeeee;
+    }
+
+    .form-inline {
+      display: inline-block;
+    }
+
+    .navbar-header.col {
+      padding: 0 !important;
+    }
+
+    .navbar {
+      background: #fff;
+      padding-left: 16px;
+      padding-right: 16px;
+      border-bottom: 1px solid #d6d6d6;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+    }
+
+    .nav-link img {
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      margin: -8px 0;
+      float: left;
+      margin-right: 10px;
+    }
+
+    .navbar .navbar-brand {
+      color: #555;
+      padding-left: 0;
+      padding-right: 50px;
+      font-family: 'Merienda One', sans-serif;
+    }
+
+    .navbar .navbar-brand i {
+      font-size: 20px;
+      margin-right: 5px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      box-shadow: none;
+      padding-right: 35px;
+      border-radius: 3px !important;
+    }
+
+    .search-box .input-group-addon {
+      min-width: 35px;
+      border: none;
+      background: transparent;
+      position: absolute;
+      right: 0;
+      z-index: 9;
+      padding: 7px;
+      height: 100%;
+    }
+
+    .search-box i {
+      color: #a0a5b1;
+      font-size: 19px;
+    }
+
+    .navbar .nav-item i {
+      font-size: 18px;
+    }
+
+    .navbar .dropdown-item i {
+      font-size: 16px;
+      min-width: 22px;
+    }
+
+    .navbar .nav-item.open>a {
+      background: none !important;
+    }
+
+    .navbar .dropdown-menu {
+      border-radius: 1px;
+      border-color: #e5e5e5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+    }
+
+    .navbar .dropdown-menu li a {
+      color: #777;
+      padding: 8px 20px;
+      line-height: normal;
+    }
+
+    .navbar .dropdown-menu li a:hover,
+    .navbar .dropdown-menu li a:active {
+      color: #333;
+    }
+
+    .navbar .dropdown-item .material-icons {
+      font-size: 21px;
+      line-height: 16px;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+
+    .navbar .badge {
+      background: #f44336;
+      font-size: 11px;
+      border-radius: 20px;
+      position: absolute;
+      min-width: 10px;
+      padding: 4px 6px 0;
+      min-height: 18px;
+      top: 5px;
+    }
+
+    .navbar ul.nav li a.notifications,
+    .navbar ul.nav li a.messages {
+      position: relative;
+      margin-right: 10px;
+    }
+
+    .navbar ul.nav li a.messages {
+      margin-right: 20px;
+    }
+
+    .navbar a.notifications .badge {
+      margin-left: -8px;
+    }
+
+    .navbar a.messages .badge {
+      margin-left: -4px;
+    }
+
+    .navbar .active a,
+    .navbar .active a:hover,
+    .navbar .active a:focus {
+      background: transparent !important;
+    }
+
+    .title-panel{
+      margin-bottom: 0;
+      font-size: 40px;
+      font-family: "Times New Roman", Times, serif;
+    }
+   
+    .noresize {
+      resize: none; 
+    }
+    table {
+      max-width: 100%;
+      background-color: transparent;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-family: arial;
+    }
+  
+    .table {
+      border-bottom: #999999 solid 1px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .table th,
+    .table td {
+      border-right: #999999 solid 1px;
+      font-size: 12px;
+      padding: 8px;
+      line-height: 20px;
+      text-align: left;
+      vertical-align: middle;
+    }
+  
+    .table td:last-child {
+       border-right: 0;
+    }
+  
+    .table thead th {
+      font-weight: normal;
+      background-color: #005dab;
+      color: #fff;
+      font-size: 15px;
+    }
+  
+    .table tbody > tr:nth-child(odd) > td,
+    .table tbody > tr:nth-child(odd) > th {
+      background-color: #f8f8f8;
+    }
+
+    table {
+      max-width: 100%;
+      background-color: transparent;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-family: arial;
+    }
+  
+    .table {
+      border-bottom: #999999 solid 1px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .table th,
+    .table td {
+      border-right: #999999 solid 1px;
+      font-size: 12px;
+      padding: 8px;
+      line-height: 20px;
+      text-align: left;
+      vertical-align: middle;
+    }
+  
+    .table td:last-child {
+       border-right: 0;
+    }
+  
+    .table thead th {
+      font-weight: normal;
+      background-color: #005dab;
+      color: #fff;
+      font-size: 15px;
+    }
+    .table2 thead th {
+      font-weight: normal;
+      background-color: #dff0d8;;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    
+  
+    .table tbody > tr:nth-child(odd) > td,
+    .table tbody > tr:nth-child(odd) > th {
+      background-color: #f8f8f8;
+    }
+  
+  /* Small Sizes */
+  @media (max-width: 767px) { 
+    
+    /* Responsive Table */
+    .table-responsive {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
+  
+    .table-responsive thead,
+    .table-responsive tbody,
+    .table-responsive th,
+    .table-responsive td,
+    .table-responsive tr {
+      display: block;
+    }
+    .table-responsive td,
+    .table-responsive th {
+      height: 35px;
+    }
+  
+    .table-responsive thead {
+      float: left;
+    }
+  
+    .table-responsive tbody {
+      width: auto;
+      position: relative;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+  
+    .table-responsive tbody tr {
+      display: inline-block;
+    }
+  
+    
+    .table td:last-child {
+       border-right: #999999 solid 1px;
+    }
+  
+  
+  }
+    @media (min-width: 1200px) {
+      .form-inline .input-group {
+        width: 300px;
+        margin-left: 30px;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      .form-inline {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .input-group {
+        width: 100%;
+      }
+    }
