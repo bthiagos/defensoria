@@ -304,6 +304,7 @@ header('Content-Type: text/html; charset=utf-8');
                                     </div>
                                 </div>
                             </div>
+                            
                             <br />
 
                             <!-- Confirmação de Senha -->
@@ -321,7 +322,7 @@ header('Content-Type: text/html; charset=utf-8');
                             <br /><br /><br />
                             <!-- Botão de Envio / Cadastro -->
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary is-block is-link"> Cadastrar </button>
+                                <button type="submit" class="btn btn-primary is-block is-link" name="btn_cadastrar"> Cadastrar </button>
                             </div>
                         </form>
 

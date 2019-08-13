@@ -2,6 +2,7 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -39,40 +40,47 @@ include("conexao.php");
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
-                    <a href="painel.php" class="nav-link">Inicio</a>
+                    <a href="painel.php" class="nav-link">Atendimento</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Desempenho</a>
+                            <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Atividade Complementar</a>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
+                        </li>
+                        <li>
+                            <a href="relAtividadeComplementar.php" class="dropdown-item">Relatório de Atividade
+                                Complementar</a>
                         </li>
                     </ul>
                 </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link notifications"><i class="fa fa-bell-o"></i><span
-                            class="badge">1</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link messages"><i class="fa fa-envelope-o"></i><span
-                            class="badge">10</span></a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
-                            alt="Avatar" />
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -89,178 +97,139 @@ include("conexao.php");
         </div>
     </nav>
 
+
     <!-- Atendimento Inicial -->
-    <section>
-        <form class="form-horizontal" action="cadastrar_atendimento.php" method="POST">
-            <fieldset>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Cadastro de Atendimento</div>
-
-                    <div class="panel-body">
-                        <?php
-                        if(isset($_SESSION['status_atendimento'])):
+    <section id="painel">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Cadastro do Assistido
+                </div>
+                <div class="panel-body">
+                    <?php
+                        if(isset($_SESSION['status_cadastroAssistido'])):
                         ?>
 
-                        <div class="alert alert-sucess" role="alert">
-                            <h5 class="alert-heading">Cadastro de Atendimento Realizado com Sucesso!</h5>
-                        </div>
+                    <div class="alert alert-sucess" role="alert">
+                        <h5 class="alert-heading">Cadastro do Assistido Realizado com Sucesso!</h5>
+                    </div>
 
-                        <?php
+                    <?php
                         endif;
-                        unset($_SESSION['status_atendimento']);
+                        unset($_SESSION['status_cadastroAssistido']);
                         ?>
-                        <?php
-                        if(isset($_SESSION['assistido_existe'])):
+                    <?php
+                        if(isset($_SESSION['rg_assistido_existe'])):
                         ?>
 
-                        <div class="alert alert-danger" role="alert">
-                            <p class="mb-0">Atendimento para este usuário já existe. Informe outro e tente novamente.
-                            </p>
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        <p class="mb-0">Este usuário-assistido já existe. Informe outro e tente novamente.
+                        </p>
+                    </div>
 
-                        <?php
+                    <?php
                         endif;
-                        unset($_SESSION['assistido_existe']);
+                        unset($_SESSION['rg_assistido_existe']);
                         ?>
-                        <div class="form-group">
-                            <div class="col-md-11 control-label">
-                                <p class="help-block">
-                                    <h11>*</h11> Campo Obrigatório
-                                </p>
+                    <div class="box">
+                        <form action="cadastrarAssistido.php" method="POST">
+                            <div class="row">
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"></div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo Obrigatório *</div>
                             </div>
-                        </div>
+                            <br />
+                            <!--          NOVO FORM           -->
 
-                        <!-- Text input-->
+                            <!-- Nome e Sexo-->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 control">
+                                        <label class="control-label" for="nome_ass">Nome Completo <h11>*</h11>
+                                        </label>
+                                        <input id="nome_ass" name="nome_ass" placeholder=""
+                                            class="form-control input-md" required="" type="text">
+                                    </div>
+                                    <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
+                                    <div class="col-md-4">
+                                        <label required="" class="radio-inline" for="radios-0">
+                                            <input name="sexo_ass" id="sexo_ass" value="F" type="radio" required>
+                                            Feminino
+                                        </label>
+                                        <label class="radio-inline" for="radios-1">
+                                            <input name="sexo_ass" id="sexo_ass" value="M" type="radio">
+                                            Masculino
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <!-- RG e Estado Civil-->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                        <label class="control-label" for="rg_ass">RG <h11>*</h11>
+                                        </label>
+                                        <input id="rg_ass" name="rg_ass" placeholder="Apenas números"
+                                            class="form-control input-md" required="" type="text" maxlength="9"
+                                            pattern="[0-9]+$">
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control"></div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                        <label class="control-label" for="Estado Civil">Telefone <h11>*</h11>
+                                        </label>
+                                        <input type="text" class="form-control" name="telefone_ass" id="inputFone"
+                                            placeholder="(xx)xxxx-xxxx" pattern="\([0-9]{2}\)[0-9]{4,6}-[0-9]{3,4}$"
+                                            required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <br />
+                    <!-- E-mail e Estad-->
+                    <div class="row">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="nome_assistido">Nome Completo <h11>*</h11>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 control">
+                                <label class="control-label" for="email_ass">Email <h11>*</h11>
                                 </label>
-                            <div class="col-md-8">
-                                <input id="nome_assistido" name="nome_assistido" placeholder=""
-                                    class="form-control input-md" required="" type="text">
-                            </div>
-                        </div>
-
-                        <!-- Text input-->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="cpf_assistido">CPF <h11>*</h11></label>
-                            <div class="col-md-2">
-                                <input id="cpf_assistido" name="cpf_assistido" placeholder="Apenas números"
-                                    class="form-control input-md" required="" type="text" maxlength="11"
-                                    pattern="[0-9]+$">
-                            </div>
-
-                            <div class="col-md-2">
-                                <!--<input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">-->
-                            </div>
-
-                            <!-- Multiple Radios (inline) -->
-
-                            <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
-                            <div class="col-md-4">
-                                <label required="" class="radio-inline" for="radios-0">
-                                    <input name="sexo_assistido" id="sexo_assistido" value="feminino" type="radio"
-                                        required>
-                                    Feminino
-                                </label>
-                                <label class="radio-inline" for="radios-1">
-                                    <input name="sexo_assistido" id="sexo_assistido" value="masculino" type="radio">
-                                    Masculino
-                                </label>
-                            </div>
-                        </div>
-
-
-                        <!-- Prepended text-->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="email_assistido">Email <h11>*</h11></label>
-                            <div class="col-md-5">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="email_assistido" name="email_assistido" class="form-control"
+                                    <input id="email_ass" name="email_ass" class="form-control"
                                         placeholder="email@email.com" required="" type="text"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <br />
 
-
-
-                        <!-- Select Basic -->
+                    <!-- Button (Double) -->
+                    <div class="row">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="Estado Civil">Estado Civil <h11>*</h11></label>
+                            <label class="control-label" for="cadastrar_atendimento"></label>
                             <div class="col-md-2">
-                                <select required id="estadocivil_assistido" name="estadocivil_assistido"
-                                    class="form-control">
-                                    <option value=""></option>
-                                    <option value="Solteiro(a)">Solteiro(a)</option>
-                                    <option value="Casado(a)">Casado(a)</option>
-                                    <option value="Divorciado(a)">Divorciado(a)</option>
-                                    <option value="Viuvo(a)">Viuvo(a)</option>
-                                </select>
+                                <button class="btn btn-success btn-block" type="Submit">Cadastrar</button>
                             </div>
-
-                            <!-- Prepended checkbox -->
-                            <div class="col-md-3">
-                            </div>
-                        </div>
-
-                        <!-- Select Basic -->
-                        <div class="form-group">
-
-                            <label class="col-md-2 control-label" for="selectbasic">Domínio do Direito <h11>*</h11>
-                            </label>
-
-                            <div class="col-md-3">
-                                <!--<input id="dominioDireito1" name="dominioDireito" placeholder=" Informe o domínio do Direito" class="form-control input-md" required="" type="text">-->
-                                <select required id="dominioDireito" name="dominioDireito" class="form-control">
-                                    <option value=""></option>
-                                    <option value="Civel">Cível</option>
-                                    <option value="Familia">Família</option>
-                                    <option value="Consumidor">Consumidor</option>
-                                    <option value="Fazenda Publica">Fazenda Pública</option>
-                                    <option value="Criminal">Criminal</option>
-
-                                </select>
-                            </div>
-
-
-                            <!-- Text input-->
-
-                            <label class="col-md-2 control-label" for="profissao">Estagiário do Atendimento<h11>*</h11>
-                            </label>
-                            <div class="col-md-3">
-                                <select required id="estagiario" name="estagiario" class="form-control">
-                                    <option value=""></option>
-                                    <option value="Paula Wilson">Paula Wilson</option>
-                                    <option value="Jose Silva">Jose Silva</option>
-                                    <option value="Carla Maria">Carla Maria</option>
-                                    <option value="Antonio Almeida">Antonio Almeida</option>
-                                    <option value="Joana Nascimento">Joana Nascimento</option>
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Button (Double) -->
-                        <div class="form-group">
-                            <label class="col-md-2 control-label" for="cadastrar_atendimento"></label>
-                            <div class="col-md-8">
-                                <button class="btn btn-success" type="Submit">Cadastrar</button>
-                                <button id="Cancelar" name="Cancelar" class="btn btn-danger"
+                            <div class="col-md-2">
+                                <button id="Cancelar" name="Cancelar" class="btn btn-danger btn-block"
                                     type="Reset">Cancelar</button>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
+            </div>
+        </div>
 
-
-            </fieldset>
         </form>
     </section>
 
     <!-- JAVASCRIPT-->
     <script type="text/javascript">
+    $('#myForm').validator();
+    $('#inputFone').mask("(99)9999-9999");
+
     function limpa_formulario_cep() {
         //Limpa valores do formulário de cep.
         document.getElementById('rua').value = ("");

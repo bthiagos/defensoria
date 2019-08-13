@@ -2,9 +2,10 @@
 session_start();
 include('verifica_login.php');
 include("conexao.php");
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -39,40 +40,47 @@ include("conexao.php");
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
-                    <a href="painel.php" class="nav-link">Inicio</a>
+                    <a href="painel.php" class="nav-link">Atendimento</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Desempenho</a>
+                            <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Relatório de Atividade Complementar</a>
+                            <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
+                        </li>
+                        <li>
+                            <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Serviços <b
+                            class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="relDesempenho.php" class="dropdown-item">Relatório de Desempenho</a>
+                        </li>
+                        <li>
+                            <a href="relAtividadeComplementar.php" class="dropdown-item">Relatório de Atividade
+                                Complementar</a>
                         </li>
                     </ul>
                 </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right ml-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link notifications"><i class="fa fa-bell-o"></i><span
-                            class="badge">1</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link messages"><i class="fa fa-envelope-o"></i><span
-                            class="badge">10</span></a>
-                </li>
+
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img
-                            src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar"
-                            alt="Avatar" />
-                        <?php echo $_SESSION['nome'];?> <b class="caret"></b>
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
+                        <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
+                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -93,13 +101,12 @@ include("conexao.php");
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Atendimentos
+                    Assistidos
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-9"></div>
-                        <div class="col-sm-3">
-                            <a href="novoAtendimento.php" class="btn btn-primary">Adicionar Atendimento</a>
+                        <div class="col-sm-9">
+                            <h4>Lista de Estagiários</h4>
                         </div>
                     </div><br />
                     <div class="row">
@@ -108,31 +115,33 @@ include("conexao.php");
 
                                 <thead>
                                     <tr>
-                                        <th>Nº Atendimento</th>
+                                        <th>RG</th>
                                         <th>Nome</th>
-                                        <th>CPF</th>
-                                        <th>Sexo</th>
                                         <th>E-mail</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM atendimento";
+
+                                    $sql = "SELECT * FROM assistido"; 
                                     $resultado = mysqli_query($conexao, $sql);
-                                    while($dados = mysqli_fetch_array($resultado)):
+                                    while($dados = mysqli_fetch_array($resultado)):  
                                     ?>
                                     <tr>
-                                        <td><?php echo $dados['idatendimento']; ?></td>
-                                        <td><?php echo $dados['nome_assistido']; ?></td>
-                                        <td><?php echo $dados['cpf_assistido']; ?></td>
-                                        <td><?php echo $dados['sexo_assistido']; ?></td>
-                                        <td><?php echo $dados['email_assistido']; ?></td>
-                                        <td><a href="editarAtendimento.php?id=<?php echo $dados['idatendimento']; ?>"
-                                            class="btn btn-success btn-custom">
-                                            <i class="material-icons">edit</i></a>
-                                            <a href="#" class="btn btn-danger btn-custom"><i
-                                                    class="material-icons">delete</i></a></td>
+                                        <td><?php echo $dados['RG_ASS']; ?></td>
+                                        <td><?php echo $dados['NOME_ASS']; ?></td>
+                                        <td><?php echo $dados['EMAIL_ASS']; ?></td>
+                                        <!--<td><?php echo $dados['INSTITUICAO_FUNC']; ?></td>-->
+
+                                        <td>
+                                            <a href="verAssistido.php?id=<?php echo $dados['RG_ASS']; ?>"
+                                                class="btn btn-success btn-custom">
+                                                <i class="material-icons">visibility</i>
+                                            </a>
+
+                                        </td>
+
                                     </tr>
                                     <?php endwhile; ?>
 
