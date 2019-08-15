@@ -80,11 +80,11 @@ header('Content-Type: text/html; charset=utf-8');
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
                         <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
-                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="perfil.php" class="dropdown-item"><i class="fa fa-user"></i>Perfil
+                            <a href="perfil.php?id=<?php echo $_SESSION['mat_func']; ?>" class="dropdown-item"><i class="fa fa-user"></i>Perfil
                             </a>
                         </li>
                         <li>
@@ -105,11 +105,17 @@ header('Content-Type: text/html; charset=utf-8');
                 </div>
                 <div class="panel-body">
                     <?php
-                    $sql = "SELECT * FROM funcionario
+                    /*$sql = "SELECT * FROM funcionario
                             INNER JOIN tipo_funcionario
-                            ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC";
-                    $resultado = mysqli_query($conexao, $sql);
-                    $dados =  mysqli_fetch_array($resultado); 
+                            ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC";*/
+                            if(isset($_GET['id'])):
+                                $id = mysqli_escape_string($conexao, $_GET['id']);
+                                $sql = "SELECT * FROM funcionario  
+                                INNER JOIN tipo_funcionario ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC
+                                WHERE funcionario.MAT_FUNC = '$id'"; 
+                                $resultado = mysqli_query($conexao, $sql);
+                                $dados =  mysqli_fetch_array($resultado); 
+                            endif;
                     ?>
 
                     <div class="row">
@@ -137,7 +143,7 @@ header('Content-Type: text/html; charset=utf-8');
                                         <td><?php echo $dados['EMAIL_FUNC']; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Tipo do Estágio: </td>
+                                        <td>Cargo: </td>
                                         <td><?php echo $dados['CARGO_FUNC']; ?></td>
                                     </tr>
                                     <tr>

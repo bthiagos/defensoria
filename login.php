@@ -28,8 +28,17 @@ if(($row == 1) && ($id_tipo_func == 1)){
 	$_SESSION['nome_func'] = $matricula_bd['nome_func'];
 	$_SESSION['mat_func'] = $matricula_bd['mat_func'];
 	$_SESSION['id_tipo_func'] = $matricula_bd['id_tipo_func'];
-	header('Location: painel.php');
+	header('Location: admin/painel-admin.php');
 	exit();
+} else if(($row == 1) && (($id_tipo_func == 2) || ($id_tipo_func == 3))){
+	
+		//$tipo_bd = mysqli_fetch_assoc($res);
+		$_SESSION['nome_func'] = $matricula_bd['nome_func'];
+		$_SESSION['mat_func'] = $matricula_bd['mat_func'];
+		$_SESSION['id_tipo_func'] = $matricula_bd['id_tipo_func'];
+		header('Location: painel.php');
+		exit();
+	
 } else {
 	$_SESSION['nao_autenticado'] = true;
 	header('Location: index.php');

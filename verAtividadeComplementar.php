@@ -80,11 +80,12 @@ header('Content-Type: text/html; charset=utf-8');
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">
                         <img src="https://img.icons8.com/ios-filled/30/000000/user-male-circle.png">
-                        <?php echo $_SESSION['nome_func'];?> <b class="caret"></b>
+                        <?php echo $_SESSION['nome_func'];?><b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="perfil.php" class="dropdown-item"><i class="fa fa-user"></i>Perfil
+                            <a href="perfil.php?id=<?php echo $_SESSION['mat_func']; ?>" class="dropdown-item"><i
+                                    class="fa fa-user"></i>Perfil
                             </a>
                         </li>
                         <li>
@@ -168,8 +169,13 @@ header('Content-Type: text/html; charset=utf-8');
                                 </tbody>
                             </table>
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
 
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="gerarpdf-ac.php?id=<?php echo $dados['MAT_FUNC']; ?>"
+                                        class="btn btn-info btn-block" target="_blank">
+                                        <i class='fa fa-file-pdf-o'></i>&nbsp Gerar PDF</a>
                                 </div>
                                 <div class="col-sm-2">
                                     <a href="relAtividadeComplementar.php" class="btn btn-danger btn-block">
