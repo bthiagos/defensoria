@@ -15,7 +15,7 @@ include('verifica_login-admin.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style-admin.css">
     <link rel="icon" href="img/favicon16x16.ico" sizes="16x16">
     <link rel="icon" href="img/favicon32x32.ico" sizes="32x32">
     <link rel="icon" href="img/favicon48x48.ico" sizes="48x48">
@@ -83,7 +83,7 @@ include('verifica_login-admin.php');
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="perfil-admin.php" class="dropdown-item"><i class="fa fa-user"></i>Perfil
+                            <a href="perfil-admin.php?id=<?php echo $_SESSION['mat_func']; ?>" class="dropdown-item"><i class="fa fa-user"></i>Perfil
                             </a>
                         </li>
                         <li>
@@ -95,7 +95,6 @@ include('verifica_login-admin.php');
             </ul>
         </div>
     </nav>
-
 
     <section id="painel">
         <div class="container">

@@ -2,6 +2,19 @@
 header('Content-Type: text/html; charset=utf-8');
 include("../conexao.php");
 include('verifica_login-admin.php');
+
+//SELECT
+if(isset($_GET['id'])):
+    //$id = mysqli_escape_string($conexao, $_GET['id']);
+    $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
+    $_SESSION['id'] = $id;
+    $sql = "SELECT * FROM funcionario  
+    INNER JOIN tipo_funcionario ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC
+    WHERE funcionario.MAT_FUNC = '$id'";      
+    $resultado = mysqli_query($conexao, $sql);
+    $dados =  mysqli_fetch_array($resultado);
+endif;    
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,7 +28,7 @@ include('verifica_login-admin.php');
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style-admin.css">
     <link rel="icon" href="img/favicon16x16.ico" sizes="16x16">
     <link rel="icon" href="img/favicon32x32.ico" sizes="32x32">
     <link rel="icon" href="img/favicon48x48.ico" sizes="48x48">
@@ -83,7 +96,7 @@ include('verifica_login-admin.php');
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="perfil-admin.php" class="dropdown-item"><i class="fa fa-user"></i>Perfil
+                            <a href="perfil-admin.php?id=<?php echo $_SESSION['mat_func']; ?>" class="dropdown-item"><i class="fa fa-user"></i>Perfil
                             </a>
                         </li>
                         <li>
@@ -96,54 +109,47 @@ include('verifica_login-admin.php');
         </div>
     </nav>
 
-
     <section id="painel">
         <div class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Funcionário
+                    Editar Funcionário
                 </div>
                 <div class="panel-body">
+                <?php
+                    if(isset($_SESSION['status_edit'])):
+                    ?>
+                    <!--<p>Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>-->
+                    <div class="alert alert-sucess" role="alert">
+                        <h5 class="alert-heading">Cadastro Editado!</h5>
+                    </div>
+
+                    <?php
+                    endif;
+                    unset($_SESSION['status_edit']);
+                    ?>
                     <?php
                     //SELECT
-                    if(isset($_GET['id'])):
+                   /* if(isset($_GET['id'])):
                         $id = mysqli_escape_string($conexao, $_GET['id']);
                         $sql = "SELECT * FROM funcionario  
                         INNER JOIN tipo_funcionario ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC
                         WHERE funcionario.MAT_FUNC = '$id'"; 
+                        //INNER JOIN atendimento ON atendimento.MAT_FUNC = funcionario.MAT_FUNC
+                        //";
+                      
+                        /*$sql = "SELECT * FROM atendimento 
+                        INNER JOIN funcionario ON funcionario.MAT_FUNC = atendimento.MAT_FUNC
+                        INNER JOIN assistido ON assistido.RG_ASS = atendimento.RG_ASS
+                        INNER JOIN area_do_direito ON area_do_direito.ID_DIREITO = atendimento.ID_DIREITO
+                        INNER JOIN tipo_funcionario ON tipo_funcionario.ID_TIPO_FUNC = funcionario.ID_TIPO_FUNC
+                        WHERE funcionario.MAT_FUNC = '$id'";
                          
                         $resultado = mysqli_query($conexao, $sql);
                         $dados =  mysqli_fetch_array($resultado);
-                        $_SESSION['id'] = $id;
-                    endif;    
+                    endif;  */  
                      ?>
 
-
-                    <?php
-                    if(isset($_SESSION['status_editar'])):
-                    ?>
-                    <!--<p>Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>-->
-                    <div class="alert alert-sucess" role="alert">
-                        <h5 class="alert-heading">Edição realizada com sucesso!</h5>
-                        <!--<p class="mb-0">Faça login informando o seu usuário e senha <a href="login.php">aqui</a></p>-->
-                    </div>
-
-                    <?php
-                    endif;
-                    unset($_SESSION['status_editar']);
-                    ?>
-                    <?php
-                    if(isset($_SESSION['matricula_nao_existe'])):
-                    ?>
-                    <!--<p>O usuário escolhido já existe. Informe outro e tente novamente.</p>-->
-                    <div class="alert alert-danger" role="alert">
-                        <p class="mb-0">Houve um erro com o usuário escolhido. Informe outro e tente novamente.</p>
-                    </div>
-
-                    <?php
-                    endif;
-                    unset($_SESSION['matricula_nao_existe']);
-                    ?>
                     <div class="row">
                     </div>
                     <div class="row">
@@ -151,7 +157,6 @@ include('verifica_login-admin.php');
 
                             <div class="box" style="padding-left: 10px;">
                                 <form action="updateFunc-admin.php" method="POST">
-
                                     <br />
                                     <!--          NOVO FORM           -->
 
@@ -161,8 +166,8 @@ include('verifica_login-admin.php');
                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
                                                 <label for="matricula">Matrícula <h11>*</h11></label>
                                                 <input name="mat_func" type="text" class="form-control" required="true"
-                                                    id="matricula" placeholder="<?php echo $dados['MAT_FUNC']; ?>"
-                                                    min="00001" max="99999" maxlength="5" pattern="[0-9]+$" disabled>
+                                                    id="matricula" value="<?php echo $dados['MAT_FUNC']; ?>"
+                                                    min="00001" max="99999" maxlength="5" pattern="[0-9]+$">
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control"></div>
 
@@ -170,8 +175,8 @@ include('verifica_login-admin.php');
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                                 <label for="CPF">CPF <h11>*</h11></label>
                                                 <input name="cpf_func" type="text" class="form-control" required="true"
-                                                    id="cpf_func" placeholder="<?php echo $dados['CPF_FUNC']; ?>"
-                                                    maxlength="11" pattern="[0-9]+$" disabled>
+                                                    id="cpf_func" value="<?php echo $dados['CPF_FUNC']; ?>"
+                                                    maxlength="11" pattern="[0-9]+$" >
                                             </div>
 
                                         </div>
@@ -185,7 +190,7 @@ include('verifica_login-admin.php');
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control">
                                                 <label for="nome">Nome Completo <h11>*</h11></label>
                                                 <input name="nome_func" type="text" class="form-control" required="true"
-                                                    id="nome" placeholder="<?php echo $dados['NOME_FUNC']; ?>" disabled>
+                                                    id="nome" value="<?php echo $dados['NOME_FUNC']; ?>" >
                                             </div>
                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
 
@@ -193,9 +198,9 @@ include('verifica_login-admin.php');
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                                 <label for="RG">RG <h11>*</h11></label>
                                                 <input name="rg_func" type="text" class="form-control" required="true"
-                                                    id="rg_func" placeholder="<?php echo $dados['RG_FUNC']; ?>"
+                                                    id="rg_func" value="<?php echo $dados['RG_FUNC']; ?>"
                                                     min="000000000" max="999999999" maxlength="9" pattern="[0-9]+$"
-                                                    disabled>
+                                                    >
                                             </div>
 
                                         </div>
@@ -209,7 +214,7 @@ include('verifica_login-admin.php');
                                                 <label for="Endereco">Endereço <h11>*</h11></label>
                                                 <input name="endereco_func" type="text" class="form-control"
                                                     required="true" id="endereco_func"
-                                                    placeholder="<?php echo $dados['ENDERECO_FUNC']; ?>" disabled>
+                                                    value="<?php echo $dados['ENDERECO_FUNC']; ?>" >
                                             </div>
 
                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
@@ -220,7 +225,7 @@ include('verifica_login-admin.php');
 
                                                 <input name="endereco_func" type="text" class="form-control"
                                                     required="true" id="endereco_func"
-                                                    placeholder="<?php echo $dados['CARGO_FUNC']; ?>" disabled>
+                                                    value="<?php echo $dados['CARGO_FUNC']; ?>" >
                                             </div>
 
                                         </div>
@@ -234,7 +239,7 @@ include('verifica_login-admin.php');
                                                 </label>
                                                 <input name="instituicao_func" type="text" class="form-control"
                                                     required="true" id="instituicaoensino"
-                                                    placeholder="<?php echo $dados['INSTITUICAO_FUNC']; ?>" disabled>
+                                                    value="<?php echo $dados['INSTITUICAO_FUNC']; ?>" >
                                             </div>
 
                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
@@ -245,7 +250,7 @@ include('verifica_login-admin.php');
                                                     </h11></label>
                                                 <input name="matricula_inst_func" type="text" class="form-control"
                                                     required="true" id="matricula_inst_func"
-                                                    placeholder="<?php echo $dados['MATRICULA_INST_FUNC']; ?>" disabled
+                                                    value="<?php echo $dados['MATRICULA_INST_FUNC']; ?>" 
                                                     min="0000000000" max="9999999999" maxlength="10" pattern="[0-9]+$">
                                             </div>
                                         </div>
@@ -258,87 +263,76 @@ include('verifica_login-admin.php');
                                                 <label for="email">E-mail <h11>*</h11></label>
                                                 <input name="email_func" type="email" class="form-control"
                                                     required="true" id="email"
-                                                    placeholder="<?php echo $dados['EMAIL_FUNC']; ?>" disabled>
+                                                    value="<?php echo $dados['EMAIL_FUNC']; ?>" >
                                             </div>
 
                                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 control"></div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
                                                 <label for=" Horario de Estagiário">Horário do Estagiário<h11>*</h11>
                                                 </label>
-                                                <input name="email_func" type="email" class="form-control"
+                                                <input name="email_func" type="text" class="form-control"
                                                     required="true" id="email"
-                                                    placeholder="<?php echo $dados['HORA_EXPEDIENTE_FUNC']; ?>"
-                                                    disabled>
+                                                    value="<?php echo $dados['HORA_EXPEDIENTE_FUNC']; ?>"
+                                                    >
                                             </div>
                                         </div>
                                     </div>
                                     <br />
-                                    <!--SENHA E CONFIRMAÇÃO-->
+                                    <!-- SENHA-->
                                     <div class="row">
                                         <div class="form-group">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
-                                                <label for="senha">Nova Senha <h11>*</h11></label>
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                                <label for="senha">Senha <h11>*</h11></label>
                                                 <input name="senha_func" type="password" class="form-control"
-                                                    required="true" id="senha_func" placeholder="******************">
+                                                    required="true" id="senha"
+                                                    value="**************" >
+                                            </div>
+                                            <!--<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 control">
+                                                <label for=" Horario de Estagiário">Confirmação de Senha<h11>*</h11>
+                                                </label>
+                                                <input name="confirmacao_senha" type="password" class="form-control"
+                                                    required="true" id="confirmacao_senha"
+                                                    value="**************"
+                                                    disabled>-->
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control">
-                                                <label for="senha">Confirmar Nova Senha <h11>*</h11></label>
-                                                <input name="confirma_senha" type="password" class="form-control"
-                                                    required="true" id="confirma_senha"
-                                                    placeholder="******************">
-                                            </div>
+                                    </div>        
+                                    <br/><br/><br/>
+
+                                    
+                                <!-- Button (Double) -->
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label" for="editarFuncionario-admin"></label>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-success btn-block" type="submit">Salvar</button>
+                                        </div>
+                                        <div class="col-sm-2">
+                                        <a href="listaFuncionarios-admin.php" class="btn btn-danger btn-block">
+                                            <i class='fa fa-arrow-left'></i>
+                                            Voltar</a>
                                         </div>
                                     </div>
+                                </div>
+
+                                </form>
+                                <br /><br />
+
+                                <div class="row">
+                                    <div class="col-sm-10">
+
+                                    </div>
+                                   
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <br />
-
-                    </form>
-                    <br /><br />
-
-                    <div class="row">
-                        <div class="col-sm-8">
-
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn btn-primary btn-block is-link"
-                                name="btn_editar">Editar</button>
-                        </div>
-                        <div class="col-sm-2">
-                            <a href="listaFuncionarios-admin.php" class="btn btn-danger btn-block">
-                                <i class='fa fa-arrow-left'></i>
-                                Voltar</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-
-        <!-- Script JQuery para validar senha -->
-        <script>
-        var password = document.getElementById("senha_func"),
-            confirm_password = document.getElementById("confirma_senha");
-
-        function validatePassword() {
-            if (password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("Senhas diferentes!");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
-        }
-
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
-        </script>
 
     </section>
-
+    <script src="jquery.maskedinput.js" type="text/javascript"></script>
     <script src="https://ajasx.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
