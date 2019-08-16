@@ -168,8 +168,13 @@ include('verifica_login-admin.php');
                                 </tbody>
                             </table>
                             <div class="row">
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
 
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="gerarpdf-ac-admin.php?id=<?php echo $dados['MAT_FUNC']; ?>"
+                                        class="btn btn-info btn-block" target="_blank">
+                                        <i class='fa fa-file-pdf-o'></i>&nbsp Gerar PDF</a>
                                 </div>
                                 <div class="col-sm-2">
                                     <a href="relAtividadeComplementar-admin.php" class="btn btn-danger btn-block">

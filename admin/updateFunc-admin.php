@@ -30,7 +30,6 @@ $id = $_SESSION['id'];
 	email_func = '$email_func', 
 	hora_expediente_func = '$hora_expediente_func', 
 	senha_func = '$senha_func', 
-	data_cadastro_func = NOW(),
 	WHERE mat_func = '$id'";
 
 

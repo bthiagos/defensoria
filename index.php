@@ -34,7 +34,7 @@ header('Content-Type: text/html; charset=utf-8');
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
             <ul class="nav navbar-nav">
                 <li class="nav-item active"><a href="#" class="nav-link">Inicio</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>
+                <!--<li class="nav-item"><a href="#" class="nav-link">Tutorial</a></li>-->
 
             </ul>
             <form class="navbar-form form-inline">

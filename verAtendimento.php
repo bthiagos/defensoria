@@ -46,15 +46,15 @@ header('Content-Type: text/html; charset=utf-8');
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Cadastros <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>
+                        <!--<li>
                             <a href="cadastro.php" class="dropdown-item">Cadastrar Estagiário</a>
-                        </li>
+                        </li>-->
                         <li>
                             <a href="cadastroAssistido.php" class="dropdown-item">Cadastrar Assistido</a>
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="listaFuncionarios.php" class="dropdown-item">Listar Funcionários</a>
-                        </li>
+                        </li>-->
                         <li>
                             <a href="listaAssistido.php" class="dropdown-item">Listar Assistidos</a>
                         </li>
